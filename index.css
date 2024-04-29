@@ -1,0 +1,27 @@
+body {
+    margin : 0;
+    padding : 0;
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow:hidden;
+    display:flex;
+    flex-direction: column;
+    background-color: gray;
+
+}
+
+canvas{
+    background-color: rgb(181, 178, 255);
+    /* border: 1px solid ; */
+    /* width: 1200;
+    height: 1200; */
+    /* width: 500px;
+    height: 500px; */
+
+    /* width: 500;
+    height: 500; */
+    
+}
