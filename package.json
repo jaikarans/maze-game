@@ -14,7 +14,7 @@
   },
   "version": "1.0.0",
   "description": "maze game",
-  "name": "Maze-Game",
+  "name": "maze-game",
   "publisher": "jaikaran saini",
   "license": "MIT",
   "scripts": {

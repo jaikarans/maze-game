@@ -14,7 +14,8 @@ body {
 }
 
 canvas{
-    background-color: rgb(181, 178, 255);
+    /* background-color: rgb(181, 178, 255); */
+    /* background-color: white; */
     /* border: 1px solid ; */
     /* width: 1200;
     height: 1200; */

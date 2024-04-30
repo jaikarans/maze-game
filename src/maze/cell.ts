@@ -25,32 +25,6 @@ export class Cell {
         this.y = y;
     }
 
-    drawCellBoundary(maze: Maze, ctx: CanvasRenderingContext2D) {
-        let h = maze.hCell;
-        let w = maze.wCell;
-        ctx.strokeStyle = maze.wallColor;
-        ctx.lineCap = 'round'
-        ctx.lineWidth = 4;
-
-        if (!this.isTopOpen) {
-            ctx.beginPath();
-            ctx.moveTo(this.x * w, this.y * h);
-            ctx.lineTo(this.x * w + w, this.y * h);
-            ctx.stroke();
-            ctx.closePath();
-
-        }
-        
-        if (!this.isRightOpen) {
-            ctx.beginPath();
-            ctx.moveTo(this.x * w + w, this.y * h);
-            ctx.lineTo(this.x * w + w, this.y * h + h);
-            ctx.stroke();
-            ctx.closePath();
-        }
-        
-    }
-
     getNeighbourCells(maze: Maze) {
         let row: number = maze.rows;
         let col: number = maze.columns;
@@ -76,39 +50,6 @@ export class Cell {
             return true;
         } else {
             return false;
-        }
-    }
-
-    getAnyUnvisitedNeighbour() : Cell | null {
-        let a: Cell[] = new Array();
-        
-        if(this.topNeighbour && !this.topNeighbour.isVisited) a.push(this.topNeighbour);
-        if(this.rightNeighbour && !this.rightNeighbour.isVisited) a.push(this.rightNeighbour);
-        if(this.bottomNeighbour  && !this.bottomNeighbour.isVisited) a.push(this.bottomNeighbour);
-        if(this.leftNeighbour && !this.leftNeighbour.isVisited) a.push(this.leftNeighbour);
-
-        if (a.length >= 0)
-            return a[Math.floor(Math.random()*a.length)];
-        else return null;
-
-    }
-
-    removeWallBetween(cell: Cell) {
-        if (this.topNeighbour === cell) {
-            this.isTopOpen = true;
-            cell.isBottomOpen = true;
-            
-        }  if (this.rightNeighbour === cell) {
-            this.isRightOpen = true;
-            cell.isLeftOpen = true;
-            
-        }  if (this.bottomNeighbour === cell) {
-            this.isBottomOpen = true;
-            cell.isTopOpen = true;
-
-        } if (this.leftNeighbour === cell) {
-            this.isLeftOpen = true;
-            cell.isRightOpen = true;
         }
     }
 
