@@ -40,10 +40,10 @@ export const printCellPath = (maze: Maze, ctx: CanvasRenderingContext2D) => {
             // ctx.fillText(text, w*cell.x + w/8, h*cell.y+h/3);
             // ctx.fillText(text2, w*cell.x + w/8, h*cell.y+h/2);
 
-            ctx.fillText(`${cell.isTopOpen}`, w*cell.x + w/3, h*cell.y+h/9);
-            ctx.fillText(`${cell.isRightOpen}`, w*cell.x + w - w/3, h*cell.y+h/2);
-            ctx.fillText(`${cell.isBottomOpen}`, w*cell.x + w/3, h*cell.y+h-h/8);
-            ctx.fillText(`${cell.isLeftOpen}`, w*cell.x + w/9, h*cell.y+h/2);
+            // ctx.fillText(`${cell.isTopOpen}`, w*cell.x + w/3, h*cell.y+h/9);
+            // ctx.fillText(`${cell.isRightOpen}`, w*cell.x + w - w/3, h*cell.y+h/2);
+            // ctx.fillText(`${cell.isBottomOpen}`, w*cell.x + w/3, h*cell.y+h-h/8);
+            // ctx.fillText(`${cell.isLeftOpen}`, w*cell.x + w/9, h*cell.y+h/2);
             
             ctx.fillText(`${cell.x}, ${cell.y}`, w*cell.x + w/3, h*cell.y+h/3);
 

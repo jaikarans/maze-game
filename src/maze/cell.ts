@@ -15,6 +15,9 @@ export class Cell {
     // this variable will used for maze generation as well as for player after generating maze
     isVisited: boolean = false;
 
+    alpha: number = 0;
+    
+
     topNeighbour: Cell | null = null;
     rightNeighbour: Cell | null = null;
     bottomNeighbour: Cell | null = null;

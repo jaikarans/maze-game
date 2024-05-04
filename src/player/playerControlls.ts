@@ -16,18 +16,10 @@ export const goTop = (player: Player, maze: Maze, ctx: CanvasRenderingContext2D)
     // if cell is open in the direction then find the path player should go
     // until player has choice of selecting multiple paths, or reached a deadend cell
     // or reached the destination
-    let paths: Path[] | null = player.findPath(currentCell, currentCell.topNeighbour as Cell);
-    console.log('goTop(): paths: ',paths)
+    player.findPath(currentCell, currentCell.topNeighbour as Cell);
+    // player.renderPath(maze, ctx);
+    console.log('goTop()')
 
-    // render the path on the canvas
-    if(paths){
-        
-        console.log('goTop(): player current position: ', player.x, player.y);
-
-        player.renderPath(paths as Path[], maze, ctx);
-    }
-    // player.renderPlayer(player.maze, player.ctx);
-    
 }
 
 export const goRight = (player: Player, maze: Maze, ctx: CanvasRenderingContext2D) => {
@@ -39,16 +31,9 @@ export const goRight = (player: Player, maze: Maze, ctx: CanvasRenderingContext2
         return
     }
 
-    let paths: Path[] | null = player.findPath(currentCell, currentCell.rightNeighbour as Cell);
-    console.log('goRight(): paths: ',paths)
-
-    if(paths){
-
-        console.log('goRight(): player current position: ', player.x, player.y);
-
-        player.renderPath(paths as Path[], maze, ctx);
-    }
-    // player.renderPlayer(player.maze, player.ctx);
+    player.findPath(currentCell, currentCell.rightNeighbour as Cell);
+    // player.renderPath(maze, ctx);
+    console.log('goRight()')
 
 }
 
@@ -61,17 +46,10 @@ export const goBottom =(player: Player, maze: Maze, ctx: CanvasRenderingContext2
         return
     }
 
-    let paths: Path[] | null = player.findPath(currentCell, currentCell.bottomNeighbour as Cell);
-    console.log('goBottom(): paths: ',paths)
+    player.findPath(currentCell, currentCell.bottomNeighbour as Cell);
+    // player.renderPath(maze, ctx);
+    console.log('goBottom()')
 
-    if(paths){
-
-        console.log('gotBottom(): player current position: ', player.x, player.y);
-
-        player.renderPath(paths as Path[], maze, ctx);
-    }
-    // player.renderPlayer(player.maze, player.ctx);
-    
 }
 
 export const goLeft = (player: Player, maze: Maze, ctx: CanvasRenderingContext2D) => {
@@ -83,16 +61,8 @@ export const goLeft = (player: Player, maze: Maze, ctx: CanvasRenderingContext2D
         return
     }
 
-    let paths: Path[] | null = player.findPath(currentCell, currentCell.leftNeighbour as Cell);
-    console.log('goLeft(): paths: ',paths)
-
-    if(paths){
-
-        console.log('goLeft(): player current position: ', player.x, player.y);
-
-        player.renderPath(paths as Path[], maze, ctx);
-
-    }
-    // player.renderPlayer(player.maze, player.ctx);
+    player.findPath(currentCell, currentCell.leftNeighbour as Cell);
+    // player.renderPath(maze, ctx);
+    console.log('goLeft()');
     
 }

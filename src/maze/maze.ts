@@ -2,11 +2,13 @@ import {Cell} from './cell'
 import { getAnyUnvisitedNeighbourOf, removeWallBetween } from './cellOperations';
 import { generateMazePaths } from './mazeGeneration';
 import { drawCellBoundary } from './cellRender';
+import { renderMazePath } from './mazeBoundaryRender';
 
 export class Maze {
     rows: number;
     columns: number;
     wallColor: string;
+    wallShadowColor: string;
     surfaceColor: string;
     playerColor: string;
     desinationColor: string;
@@ -14,11 +16,13 @@ export class Maze {
     hCell: number;
     cells: Cell[][] = new Array<Cell[]>();
     ctx: CanvasRenderingContext2D;
+    wallLineWidth: number = 2;
 
-    constructor(ctx: CanvasRenderingContext2D, rows: number, columns: number, wallColor: string, surfaceColor: string, playerColor: string, destinationColor: string) {
+    constructor(ctx: CanvasRenderingContext2D, rows: number, columns: number, wallColor: string, wallShadowColor: string, surfaceColor: string, playerColor: string, destinationColor: string) {
         this.rows = rows;
         this.columns = columns;
         this.wallColor = wallColor;
+        this.wallShadowColor = wallShadowColor;
         this.surfaceColor = surfaceColor;
         this.playerColor = playerColor;
         this.desinationColor = destinationColor;
@@ -26,7 +30,9 @@ export class Maze {
         this.wCell = ctx.canvas.width/rows;
         this.ctx = ctx;
         ctx.canvas.style.border = `5px solid ${this.wallColor}`
-        ctx.canvas.style.backgroundColor = this.surfaceColor;
+        // ctx.save();
+        // ctx.globalAlpha = 0.5;
+        // ctx.canvas.style.backgroundColor = this.surfaceColor;
 
         // generating the cell of the maze
         for (let i=0; i<rows; i++) {
@@ -44,17 +50,11 @@ export class Maze {
         })
 
         generateMazePaths(this, 0,0);
-        this.renderPath();
+        renderMazePath(this);
 
     }
 
-    renderPath() {
-        this.cells.forEach(cellArray => {
-            cellArray.forEach(cell => {
-                drawCellBoundary(cell, this, this.ctx);
-            })
-        })
-    }
+    
 
     removeUnlikedNeighbours() {
         this.cells.forEach(cellArray => {
