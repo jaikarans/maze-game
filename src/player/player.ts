@@ -268,7 +268,7 @@ export class Player {
         if (this.playerPath.length !== 0){
             
         }
-        this.maze.cells[this.x][this.y].alpha = 1;
+        this.maze.cells[this.x][this.y].alpha = 0.5;
         // alpha = this.numberOfPaths
         // alpha++;
         // reduceAlpha(this.maze.cells, this, 0.01,0)
