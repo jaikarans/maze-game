@@ -42,6 +42,7 @@ export class Player {
     playerShadowColor: string = 'blue';
     enemyColor: string = 'red';
     isPlayerAnimating: boolean = false;
+    playerWalkSound: HTMLAudioElement;
 
     // player path from starting to current;
     playerPath: Path[] = new Array<Path>();
@@ -53,7 +54,7 @@ export class Player {
     isPlayerMovingBackward: boolean = false;
 
 
-    constructor(x: number, y: number, w: number, h: number, maze: Maze, ctx: CanvasRenderingContext2D, playerShadowColor: string, playerColor: string = 'green', enemyColor:string = 'red', scale: number = 1) {
+    constructor(x: number, y: number, w: number, h: number, maze: Maze, ctx: CanvasRenderingContext2D, playerShadowColor: string, playerWalkSound: HTMLAudioElement, playerColor: string = 'green', enemyColor:string = 'red', scale: number = 1) {
         this.x = x;
         this.y = y;
         this.xInitial = this.x;
@@ -63,6 +64,7 @@ export class Player {
         this.h = h * scale;
         this.distance = 0;
         this.scale = scale;
+        this.playerWalkSound = playerWalkSound;
         this.playerColor = playerColor;
         this.enemyColor = enemyColor;
         this.playerShadowColor = playerShadowColor;
@@ -226,6 +228,15 @@ export class Player {
 
         this.isPlayerAnimating = true;
 
+        console.log('audio duration ',this.playerWalkSound.duration)
+        // await this.playerWalkSound.play();
+        this.playerWalkSound.play(); // Start playing the audio
+        // await new Promise(resolve => {
+        //     this.playerWalkSound.onended = resolve; // Resolve the Promise when audio playback ends
+        // });
+        
+
+
         const nextPoint = this.playerPath.pop();
 
         await new Promise(resolve => setTimeout(resolve, 50));
@@ -260,6 +271,7 @@ export class Player {
         console.log('else drawing x y ', this.x, ' ', this.y, ' playerPath ', this.playerPath)
         // this.drawPlayer((this.x + 0.5) * this.w, (this.y + 0.5) * this.h);
         this.drawPlayer(this.x, this.y);
+        // this.playerWalkSound.pause();
 
         // // giving alpha value for background higlighting
         // const alphaDifference = (80 - 5) / this.numberOfPaths;
@@ -281,7 +293,7 @@ export class Player {
 
         }
 
-
+        // this.playerWalkSound.pause();
         // Repeat animation
         requestAnimationFrame(this.animatePlayer);
 
