@@ -18,16 +18,19 @@ assignCanvasWidthHight(canvas);
 
 const ctx = canvas?.getContext('2d') as CanvasRenderingContext2D;
 
-let backgroundColor = '#CCCCCC'; // light grey
+// let backgroundColor = '#CCCCCC'; // light grey
+// 
+let backgroundColor = '#267247'; // background color is #40BF77
 // let wallColor = '#333333'; // dark Grey color theory
-let wallColor = '#141414'; 
+let wallColor = '#8cd8ad'; 
+let objectShadow = '#205f3b';
 
-let playerRecentPathHighlightColor = '#7f7fff'
-let playerColor = '#0000FF'; // bright blue
-let playerShadowColor = '#00007f';
-let enemyColor = '#990000'; // dark shade of red
-let enemyShadowColor = '#4c0000';
-let objectShadow = '#515151';
+// let playerRecentPathHighlightColor = '#f7c7bd'
+let playerRecentPathHighlightColor = '#ef907b'
+let playerColor = '#e54624'; // player color #E54624 complementry of background color
+let playerShadowColor = '#b7381c';
+let enemyColor = '#8D41BF'; // triadic color of background color #8D41BF
+let enemyShadowColor = '#3e3498';
 
 
 let wallShadowColor = '#A0153E';
