@@ -11,30 +11,64 @@ export const drawCellBoundary = (cell: Cell, maze: Maze, ctx: CanvasRenderingCon
     ctx.lineCap = 'round'
     ctx.lineWidth = maze.wallLineWidth;
 
-    if (!cell.isTopOpen) {
+    // also redering visited cell shadow 
+    maze.ctx.save();
+    maze.ctx.fillStyle = maze.playerRecentPathHighlightColor;
+    maze.ctx.globalAlpha = cell.alpha
+    cell.alpha = cell.alpha;
+    maze.ctx.fillRect(cell.x * maze.wCell, cell.y * maze.hCell, maze.wCell , maze.hCell);
+    maze.ctx.restore();
+
+    if (!cell.isTopOpen && cellIsNotTopEdge(cell, maze.rows, maze.columns)) {
+        ctx.save();
+        ctx.shadowColor = maze.objectShadow;
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 3;
+        ctx.shadowBlur = 4;
         ctx.beginPath();
         ctx.moveTo(cell.x * w, cell.y * h);
         ctx.lineTo(cell.x * w + w, cell.y * h);
         ctx.stroke();
         ctx.closePath();
+        ctx.restore();
 
     }
 
-    if (!cell.isRightOpen) {
+    if (!cell.isRightOpen && cellIsNotRightEdge(cell, maze.rows, maze.columns)) {
+        ctx.save()
+        ctx.shadowColor = maze.objectShadow;
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 2;
+        ctx.shadowBlur = 4;
         ctx.beginPath();
         ctx.moveTo(cell.x * w + w, cell.y * h);
         ctx.lineTo(cell.x * w + w, cell.y * h + h);
         ctx.stroke();
         ctx.closePath();
+        ctx.restore();
     }
 
-    // also redering visited cell shadow 
-    maze.ctx.save();
-    maze.ctx.fillStyle = maze.playerColor;
-    maze.ctx.globalAlpha = cell.alpha
-    cell.alpha = cell.alpha;
-    maze.ctx.fillRect(cell.x * maze.wCell + (2*maze.wallLineWidth), cell.y * maze.hCell + (2*maze.wallLineWidth), maze.wCell - (maze.wallLineWidth * 4), maze.hCell - (maze.wallLineWidth * 4));
-    maze.ctx.restore();
+    
+}
+
+const cellIsNotTopEdge = (cell: Cell, rows: number, columns: number) => {
+    
+    if (cell.y == 0) {
+        return false;
+    }
+    
+
+    return true;
+}
+
+const cellIsNotRightEdge = (cell: Cell, rows: number, columns: number) => {
+    
+    if (cell.x == rows-1) {
+        return false;
+    }
+    
+
+    return true;
 }
 
 export const highlightVisitedCells = (maze: Maze, player: Player) => {

@@ -41,6 +41,7 @@ export class Player {
     playerColor: string = 'green';
     playerShadowColor: string = 'blue';
     enemyColor: string = 'red';
+    enemyShadowColor: string;
     isPlayerAnimating: boolean = false;
     playerWalkSound: HTMLAudioElement;
 
@@ -53,8 +54,10 @@ export class Player {
     prePaths: Path[] = new Array();
     isPlayerMovingBackward: boolean = false;
 
+    isGameEnded: boolean = false;
 
-    constructor(x: number, y: number, w: number, h: number, maze: Maze, ctx: CanvasRenderingContext2D, playerShadowColor: string, playerWalkSound: HTMLAudioElement, playerColor: string = 'green', enemyColor:string = 'red', scale: number = 1) {
+
+    constructor(x: number, y: number, w: number, h: number, maze: Maze, ctx: CanvasRenderingContext2D, playerWalkSound: HTMLAudioElement, playerColor: string='green', playerShadowColor: string, enemyColor:string = 'red', enemyShadowColor: string, scale: number = 1) {
         this.x = x;
         this.y = y;
         this.xInitial = this.x;
@@ -68,11 +71,13 @@ export class Player {
         this.playerColor = playerColor;
         this.enemyColor = enemyColor;
         this.playerShadowColor = playerShadowColor;
+        this.enemyShadowColor = enemyShadowColor
         this.maze = maze;
         this.ctx = ctx;
 
         this.xEnemy = Math.floor(Math.random() * maze.rows);
         this.yEnemy = Math.floor(Math.random() * maze.columns);
+        
 
         console.log('Enemy coordinate ', this.xEnemy,' ', this.yEnemy);
         this.drawPlayer(this.x, this.y);
@@ -229,8 +234,7 @@ export class Player {
         this.isPlayerAnimating = true;
 
         console.log('audio duration ',this.playerWalkSound.duration)
-        // await this.playerWalkSound.play();
-        this.playerWalkSound.play(); // Start playing the audio
+        this.playerWalkSound.play();
         // await new Promise(resolve => {
         //     this.playerWalkSound.onended = resolve; // Resolve the Promise when audio playback ends
         // });
@@ -256,14 +260,20 @@ export class Player {
         this.x = nextPoint.x;
         this.y = nextPoint.y;
 
-        // this.ctx.save();
-        // this.ctx.fillStyle = this.playerColor;
-        // this.ctx.globalAlpha = this.maze.cells[this.x][this.y].alpha;
-        // this.ctx.fillRect(this.x * this.w + (this.maze.wallLineWidth), this.y * this.h + (this.maze.wallLineWidth), this.w - (this.maze.wallLineWidth * 2), this.h - (this.maze.wallLineWidth * 2));
-        // this.ctx.restore();
-        // reduceAlpha(this.maze.cells, this, 0.01, 0);
         // Clear canvas and redraw maze
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        // creating border canvas
+        this.ctx.save();
+        this.ctx.beginPath();
+        this.ctx.strokeStyle = this.maze.wallColor;
+        this.ctx.lineCap = 'round'
+        this.ctx.lineWidth = this.maze.wallLineWidth; 
+        this.ctx.strokeRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
+        this.ctx.stroke();
+        this.ctx.restore();
+
+
+
         renderMazePath(this.maze);
         this.drawEnemy();
 
@@ -277,9 +287,6 @@ export class Player {
         // const alphaDifference = (80 - 5) / this.numberOfPaths;
         // let alpha = this.numberOfPaths - this.playerPath.length;
 
-        if (this.playerPath.length !== 0){
-            
-        }
         this.maze.cells[this.x][this.y].alpha = 0.5;
         // alpha = this.numberOfPaths
         // alpha++;
@@ -288,6 +295,7 @@ export class Player {
         if (this.x == this.xEnemy && this.y == this.yEnemy) {
             // alert('game end please refrese the game');
             console.log('game end please refrese the game');
+            this.isGameEnded = true;
             this.isPlayerAnimating = false;
             return;
 
@@ -312,30 +320,66 @@ export class Player {
         const playerSize = this.w; // Adjust the player size as needed
         const halfPlayerSize = playerSize / 2;
 
+        // this.ctx.save()
+        // this.ctx.fillStyle = rg;
+        this.ctx.save();
+        let rg = this.ctx.createRadialGradient(
+            (x) * this.w + this.w/3, (y) * this.h + this.w/3, 0,  // Inner circle position and radius
+            (x + 0.5) * this.w, (y + 0.5) * this.h, halfPlayerSize - this.maze.wallLineWidth // Outer circle position and radius
+        );
+        rg.addColorStop(0, this.playerColor);
+        rg.addColorStop (1, this.playerShadowColor)
+        this.ctx.fillStyle = rg;
+
+        this.ctx.shadowColor = this.maze.objectShadow
+        this.ctx.shadowOffsetX = 3;
+        this.ctx.shadowOffsetY = 4;
+        this.ctx.shadowBlur = 4;
+
         // Draw a green circle representing the player
-        this.ctx.save()
         this.ctx.beginPath();
-        this.ctx.arc((x + 0.5) * this.w, (y + 0.5) * this.h, halfPlayerSize, 0, Math.PI * 2);
-        this.ctx.fillStyle = 'green';
+        // this.ctx.fillStyle = 'blue'
+        this.ctx.arc((x + 0.5) * this.w, (y + 0.5) * this.h, halfPlayerSize - this.maze.wallLineWidth, 0, Math.PI * 2);
         this.ctx.fill();
         this.ctx.closePath();
+        // this.ctx.restore();
+        // this.ctx.save();
+
+        // this.ctx.fillStyle = 'yellow'
+        // this.ctx.beginPath();
+        // this.ctx.arc(((x) * this.w) + (this.w/3), ((y) * this.h) + (this.h/3), (halfPlayerSize - this.maze.wallLineWidth)/4, 0, Math.PI * 2);
+        // this.ctx.fill();
         this.ctx.restore()
-        // console.log('drawPlayer ',x, ' ', y, this.playerPath)
+        console.log('drawPlayer x,y ',x, ' ', y)
     }
 
     drawEnemy() {
         const playerSize = this.w; // Adjust the player size as needed
         const halfPlayerSize = playerSize / 2;
 
-        // Draw a green circle representing the player
-        this.ctx.save()
+        // Draw a green circle representing the playe
+        this.ctx.save();
+        let rg = this.ctx.createRadialGradient(
+            (this.xEnemy) * this.w + this.w/3, (this.yEnemy) * this.h + this.w/3, 0,  // Inner circle position and radius
+            (this.xEnemy + 0.5) * this.w, (this.yEnemy + 0.5) * this.h, halfPlayerSize - this.maze.wallLineWidth // Outer circle position and radius
+        );
+        rg.addColorStop(0, this.enemyColor);
+        rg.addColorStop (1, this.enemyShadowColor)
+        this.ctx.fillStyle = rg;
+
+        this.ctx.shadowColor = this.maze.objectShadow;
+        this.ctx.shadowOffsetX = 3;
+        this.ctx.shadowOffsetY = 4;
+        this.ctx.shadowBlur = 4;
+
         this.ctx.beginPath();
-        this.ctx.fillStyle = this.enemyColor;
-        this.ctx.arc((this.xEnemy + 0.5) * this.w, (this.yEnemy + 0.5) * this.h, halfPlayerSize, 0, Math.PI * 2);
+        // this.ctx.fillStyle = this.enemyColor;
+        this.ctx.arc((this.xEnemy + 0.5) * this.w, (this.yEnemy + 0.5) * this.h, halfPlayerSize - this.maze.wallLineWidth, 0, Math.PI * 2);
+        // this.ctx.arc(((this.xEnemy + 0.5) * this.w)/1.5, ((this.yEnemy + 0.5) * this.h)/1.5, (halfPlayerSize - this.maze.wallLineWidth)/4, 0, Math.PI * 2);
         this.ctx.fill();
         this.ctx.closePath();
         this.ctx.restore()
-        // console.log('drawPlayer ',x, ' ', y, this.playerPath)
+        console.log('drawEnemy x, y ',this.xEnemy, ' ', this.yEnemy);
     }
 
 
