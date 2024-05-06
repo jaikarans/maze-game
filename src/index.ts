@@ -124,6 +124,84 @@ setInterval(() => {
 }, 200)
 
 
+// mobile touch
+let touchstartX = 0;
+let touchstartY = 0;
+let touchendX = 0;
+let touchendY = 0;
+
+document.addEventListener('touchstart', function(event) {
+    touchstartX = event.changedTouches[0].screenX;
+    touchstartY = event.changedTouches[0].screenY;
+}, false);
+
+document.addEventListener('touchend', function(event) {
+    touchendX = event.changedTouches[0].screenX;
+    touchendY = event.changedTouches[0].screenY;
+    handleGesture(event);
+}, false);
+
+function handleGesture(event: any) {
+    const deltaX = touchendX - touchstartX;
+    const deltaY = touchendY - touchstartY;
+    // You can adjust the threshold values as per your requirement
+    if (Math.abs(deltaX) > 30) {
+        // Horizontal swipe
+        if (deltaX > 0) {
+            // Swiped right
+			event.preventDefault();
+			if (!player.isPlayerAnimating) {
+				console.log('Swiped right');
+				goRight(player, maze, ctx);
+				player.animatePlayer();
+			} else {
+				console.log('can not go right')
+			}
+        } else {
+            // Swiped left
+			event.preventDefault();
+			if (!player.isPlayerAnimating) {
+				console.log('Swiped left');
+				goLeft(player, maze, ctx);
+				player.animatePlayer();
+
+			} else {
+				console.log('can not go left')
+			}
+        }
+    } else if (Math.abs(deltaY) > 30) {
+        // Vertical swipe
+        if (deltaY > 0) {
+            // Swiped down
+			event.preventDefault();
+            console.log('Swiped down');
+            // Prevent default behavior of scrolling down
+			if (!player.isPlayerAnimating) {
+				goBottom(player, maze, ctx);
+				player.animatePlayer();
+
+			} else {
+				console.log('can not go swiped down')
+			}
+        } else {
+			// Swiped up
+			event.preventDefault();
+			if (!player.isPlayerAnimating) {
+				console.log('Swiped up');
+				goTop(player, maze, ctx);
+				player.animatePlayer();
+
+			} else {
+				console.log('can not go up')
+			}
+        }
+    }
+}
+
+// Disable browser's down swipe reloading
+document.addEventListener('touchmove', function(event) {
+    event.preventDefault();
+}, { passive: false });
 
 
 console.log("viportWidth: ", window.innerWidth, " viewportHeight: ", window.innerHeight)
