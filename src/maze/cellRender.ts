@@ -8,7 +8,7 @@ export const drawCellBoundary = (cell: Cell, maze: Maze, ctx: CanvasRenderingCon
     let h = maze.hCell;
     let w = maze.wCell;
     ctx.strokeStyle = maze.wallColor;
-    ctx.lineCap = 'round'
+    // ctx.lineCap = 'round'
     ctx.lineWidth = maze.wallLineWidth;
 
     // also redering visited cell shadow 

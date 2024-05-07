@@ -18,19 +18,22 @@ assignCanvasWidthHight(canvas);
 
 const ctx = canvas?.getContext('2d') as CanvasRenderingContext2D;
 
-// let backgroundColor = '#CCCCCC'; // light grey
-// 
-let backgroundColor = '#267247'; // background color is #40BF77
-// let wallColor = '#333333'; // dark Grey color theory
-let wallColor = '#8cd8ad'; 
-let objectShadow = '#205f3b';
+const body = document.getElementsByTagName('body')[0];
 
-// let playerRecentPathHighlightColor = '#f7c7bd'
-let playerRecentPathHighlightColor = '#ef907b'
-let playerColor = '#e54624'; // player color #E54624 complementry of background color
-let playerShadowColor = '#b7381c';
-let enemyColor = '#8D41BF'; // triadic color of background color #8D41BF
-let enemyShadowColor = '#3e3498';
+
+let backgroundColor = '#b7b7b7';
+body.style.backgroundColor = '#cccccc'
+
+// let backgroundColor = '#267247'; // background color is #40BF77
+let wallColor = '#141414'; // dark Grey color theory
+// let wallColor = '#8cd8ad'; 
+let objectShadow = '#515151';
+
+let playerRecentPathHighlightColor = '#7f7fff'
+let playerColor = '#0000FF'; // player color #E54624 complementry of background color
+let playerShadowColor = '#00007f';
+let enemyColor = '#990000'; // triadic color of background color #8D41BF
+let enemyShadowColor = '#4c0000';
 
 
 let wallShadowColor = '#A0153E';
@@ -44,7 +47,7 @@ let playerWalkSound = new Audio('../assets/playerWalkSoundDum60.wav');
 
 let numberOfRows = 14;
 let numberOfColumns = 18;
-let wallLineWidth = 3;
+let wallLineWidth = 1;
 let maze = new Maze(ctx, numberOfRows, numberOfColumns, wallColor, wallShadowColor, backgroundColor, objectShadow, playerColor, playerRecentPathHighlightColor, wallLineWidth);
 renderMazePath(maze);
 
