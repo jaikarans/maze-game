@@ -2,16 +2,35 @@ import '../index.css'
 import { Maze } from './maze/maze';
 import { Player } from './player/player';
 import { goBottom, goLeft, goRight, goTop } from './player/playerControlls';
-import { renderPlayer } from './player/renderPlayer';
-import { CellsWithoutAnyOpenSide, printCellPath } from './tests/cell';
 import { assignCanvasWidthHight } from './utils/canvasGeometry';
 import { renderMazePath } from './maze/mazeBoundaryRender';
 import { reduceAlpha } from './maze/reduceAlpha';
-import { highlightVisitedCells } from './maze/cellRender';
 import '../assets/playerWalkSoundDum60.wav'
 import { showMainMenu } from './pages/mainMenu';
 
 
+export const config = {
+	mobile: true,
+	numberOfRows: 14,
+	numberOfColumns: 14,
+	wallLineWidth: 1,
+	
+
+}
+
+export const theme = {
+	bodybackgroundColor: '#2D5A0E',
+	backgroundColor: '#4B9618',
+	wallColor: '#ffffff',
+	objectShadow: '#2d5a0e',
+	playerRecentPathHighlightColor: '#915db5',
+	playerColor: '#631896',
+	playerShadowColor: '#451378',
+	enemyColor: '#ff0000',
+	enemyShadowColor: '#cc0000',
+	wallShadowColor: '#A0153E',
+
+}
 
 showMainMenu();
 
@@ -20,64 +39,25 @@ const canvas = document?.getElementById('canvas') as HTMLCanvasElement;
 // setting canvas height and width without overflowing on device screen
 assignCanvasWidthHight(canvas);
 
-const ctx = canvas?.getContext('2d') as CanvasRenderingContext2D;
+export const ctx = canvas?.getContext('2d') as CanvasRenderingContext2D;
 
 const body = document.getElementsByTagName('body')[0];
+body.style.backgroundColor = theme.bodybackgroundColor;
 
 
-// let backgroundColor = '#b7b7b7';
-// body.style.backgroundColor = '#cccccc'
+export const game = {
+	maze: new Maze(ctx, config.numberOfRows, config.numberOfColumns, theme.wallColor, theme.wallShadowColor, theme.backgroundColor, theme.objectShadow, theme.playerColor, theme.playerRecentPathHighlightColor, config.wallLineWidth),
+	
 
-// // let backgroundColor = '#267247'; // background color is #40BF77
-// let wallColor = '#141414'; // dark Grey color theory
-// // let wallColor = '#8cd8ad'; 
-// let objectShadow = '#515151';
+}
 
-// let playerRecentPathHighlightColor = '#7f7fff'
-// let playerColor = '#0000FF'; // player color #E54624 complementry of background color
-// let playerShadowColor = '#00007f';
-// let enemyColor = '#990000'; // triadic color of background color #8D41BF
-// let enemyShadowColor = '#4c0000';
+renderMazePath(game.maze)
 
+export const players = {
+	player: new Player(0, 0, game.maze.wCell, game.maze.hCell, game.maze, ctx, theme.playerColor, theme.playerShadowColor, theme.enemyColor, theme.enemyShadowColor, 1),
 
-// let wallShadowColor = '#A0153E';
+}
 
-let backgroundColor = '#4B9618';
-body.style.backgroundColor = '#2D5A0E'
-
-// let backgroundColor = '#267247'; // background color is #40BF77
-let wallColor = '#ffffff'; // dark Grey color theory
-// let wallColor = '#8cd8ad'; 
-let objectShadow = '#2d5a0e';
-
-let playerRecentPathHighlightColor = '#915db5'
-let playerColor = '#631896'; // player color #E54624 complementry of background color
-let playerShadowColor = '#451378';
-let enemyColor = '#ff0000'; // triadic color of background color #8D41BF
-let enemyShadowColor = '#cc0000';
-
-
-let wallShadowColor = '#A0153E';
-
-// **************************************
-
-// *****************************************
-let playerWalkSound = new Audio('../assets/playerWalkSoundDum60.wav');
-// try {
-// 	playerWalkSound.play();
-
-// } catch (e) {
-// 	console.log('audio not played ', e)
-// }
-
-let numberOfRows = 10;
-let numberOfColumns = 10;
-let wallLineWidth = 5;
-let maze = new Maze(ctx, numberOfRows, numberOfColumns, wallColor, wallShadowColor, backgroundColor, objectShadow, playerColor, playerRecentPathHighlightColor, wallLineWidth);
-renderMazePath(maze);
-
-
-let player = new Player(0, 0, maze.wCell, maze.hCell, maze, ctx, playerWalkSound, playerColor, playerShadowColor, enemyColor, enemyShadowColor, 1);
 // renderPlayer(player, maze, ctx);
 
 document.onkeydown = checkKey;
@@ -94,10 +74,10 @@ function checkKey(e: any) {
 
 	if (e.keyCode == '38' || e.keyCode == 87) {
 		// up arrow or w
-		if (!player.isPlayerAnimating){
+		if (!players.player.isPlayerAnimating){
 			console.log('up arrow');
-			goTop(player, maze, ctx);
-			player.animatePlayer();
+			goTop(players.player, game.maze, ctx);
+			players.player.animatePlayer();
 		} else {
 
 			console.log('up arrow No');
@@ -106,11 +86,11 @@ function checkKey(e: any) {
 	}
 	else if (e.keyCode == '40' || e.keyCode == 83) {
 		// down arrow or s
-		if (!player.isPlayerAnimating) {
+		if (!players.player.isPlayerAnimating) {
 			console.log('down swap');
 			// erasePlayerAndPath (player, maze,ctx);
-        	goBottom(player, maze, ctx);
-			player.animatePlayer();
+        	goBottom(players.player, game.maze, ctx);
+			players.player.animatePlayer();
 		} else {
 			console.log('down arrow No')
 		}
@@ -120,10 +100,10 @@ function checkKey(e: any) {
 	}
 	else if (e.keyCode == '37' || e.keyCode == 65) {
 		// left arrow or a
-		if (!player.isPlayerAnimating) {
+		if (!players.player.isPlayerAnimating) {
 			console.log('left swap');
-			goLeft(player, maze, ctx);
-			player.animatePlayer();
+			goLeft(players.player, game.maze, ctx);
+			players.player.animatePlayer();
 			
 		} else {
 			console.log('left arrow No');
@@ -132,11 +112,11 @@ function checkKey(e: any) {
 	}
 	else if (e.keyCode == '39' || e.keyCode == 68) {
 		// right arrow or d
-		if (!player.isPlayerAnimating) {
+		if (!players.player.isPlayerAnimating) {
 			
 			console.log('right swap');
-			goRight(player, maze, ctx);
-			player.animatePlayer();
+			goRight(players.player, game.maze, ctx);
+			players.player.animatePlayer();
 		} else {
 			console.log('righ arrow No');
 		}
@@ -145,12 +125,12 @@ function checkKey(e: any) {
 }
 
 setInterval(() => {
-	reduceAlpha(maze.cells, player, 0.01, 0);
+	reduceAlpha(game.maze.cells, players.player, 0.01, 0);
 	// highlightVisitedCells(maze, player);
 
-	if(player.isGameEnded) {
-		maze = new Maze(ctx, numberOfRows, numberOfColumns, wallColor, wallShadowColor, backgroundColor, objectShadow, playerColor, playerRecentPathHighlightColor, wallLineWidth);
-		player = new Player(0,0, maze.wCell, maze.hCell, maze, ctx, playerWalkSound, playerColor, playerShadowColor, enemyColor, enemyShadowColor, 1);
+	if(players.player.isGameEnded) {
+		game.maze = new Maze(ctx, config.numberOfRows, config.numberOfColumns, theme.wallColor, theme.wallShadowColor, theme.backgroundColor, theme.objectShadow, theme.playerColor, theme.playerRecentPathHighlightColor, config.wallLineWidth);
+		players.player = new Player(0,0, game.maze.wCell, game.maze.hCell, game.maze, ctx, theme.playerColor, theme.playerShadowColor, theme.enemyColor, theme.enemyShadowColor, 1);
 	}
 }, 200)
 
@@ -181,20 +161,20 @@ function handleGesture(event: any) {
         if (deltaX > 0) {
             // Swiped right
 			event.preventDefault();
-			if (!player.isPlayerAnimating) {
+			if (!players.player.isPlayerAnimating) {
 				console.log('Swiped right');
-				goRight(player, maze, ctx);
-				player.animatePlayer();
+				goRight(players.player, game.maze, ctx);
+				players.player.animatePlayer();
 			} else {
 				console.log('can not go right')
 			}
         } else {
             // Swiped left
 			event.preventDefault();
-			if (!player.isPlayerAnimating) {
+			if (!players.player.isPlayerAnimating) {
 				console.log('Swiped left');
-				goLeft(player, maze, ctx);
-				player.animatePlayer();
+				goLeft(players.player, game.maze, ctx);
+				players.player.animatePlayer();
 
 			} else {
 				console.log('can not go left')
@@ -207,9 +187,9 @@ function handleGesture(event: any) {
 			event.preventDefault();
             console.log('Swiped down');
             // Prevent default behavior of scrolling down
-			if (!player.isPlayerAnimating) {
-				goBottom(player, maze, ctx);
-				player.animatePlayer();
+			if (!players.player.isPlayerAnimating) {
+				goBottom(players.player, game.maze, ctx);
+				players.player.animatePlayer();
 
 			} else {
 				console.log('can not go swiped down')
@@ -217,10 +197,10 @@ function handleGesture(event: any) {
         } else {
 			// Swiped up
 			event.preventDefault();
-			if (!player.isPlayerAnimating) {
+			if (!players.player.isPlayerAnimating) {
 				console.log('Swiped up');
-				goTop(player, maze, ctx);
-				player.animatePlayer();
+				goTop(players.player, game.maze, ctx);
+				players.player.animatePlayer();
 
 			} else {
 				console.log('can not go up')

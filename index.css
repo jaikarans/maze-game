@@ -39,21 +39,35 @@ body {
 button {
 
     width: 80%;
-    font-family: "Oswald", sans-serif;
-    /* padding: 10px; */
+    font-family: "Poetsen One", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+
+    /* padding: 5px; */
     font-size: 16px;
     /* margin-top:auto; */
-    /* padding: 12px 0px; */
+    padding: 12px 0px;
     border:1px solid black;
     border-radius:8px;
-    box-shadow: 5px 7px 0px 2px #3B0E5A;
-    font-weight: bold;
-    text-shadow: 2px 3px #451069;
+    box-shadow: 2px 3px 2px #363535;
+    /* font-weight: bold; */
+    text-shadow: 2px 3px 2px #363535;
     
     font-size:x-large;
-    color:rgb(255, 255, 255);
+    color:#FEFFFE;
     background-color:#4B9618;
 
+}
+
+button:hover {
+    background-color:#5da02f;
+    scale: 1.04;
+
+}
+
+button.clicked {
+    background-color:#5da02f;
+    scale: 1.04;
 }
 
 /* Media query for tablets, desktops, and laptops */
@@ -75,14 +89,6 @@ button {
     }
 }
 
-
-button:hover {
-    background-color:#5da02f;
-    scale: 1.04;
-
-}
-
-button:
 
 
 canvas{

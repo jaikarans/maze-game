@@ -5,6 +5,9 @@ import { renderMazePath } from "../maze/mazeBoundaryRender";
 import { reduceAlpha } from "../maze/reduceAlpha";
 import { Firework } from "./firework";
 
+
+let playerWalkSound = new Audio('../assets/playerWalkSoundDum60.wav');
+
 export class Path {
     x: number
     y: number
@@ -44,7 +47,7 @@ export class Player {
     enemyColor: string = 'red';
     enemyShadowColor: string;
     isPlayerAnimating: boolean = false;
-    playerWalkSound: HTMLAudioElement;
+    // playerWalkSound: HTMLAudioElement;
 
     // player path from starting to current;
     playerPath: Path[] = new Array<Path>();
@@ -59,7 +62,7 @@ export class Player {
     fireworks: Firework[] = [];
 
 
-    constructor(x: number, y: number, w: number, h: number, maze: Maze, ctx: CanvasRenderingContext2D, playerWalkSound: HTMLAudioElement, playerColor: string='green', playerShadowColor: string, enemyColor:string = 'red', enemyShadowColor: string, scale: number = 1) {
+    constructor(x: number, y: number, w: number, h: number, maze: Maze, ctx: CanvasRenderingContext2D, playerColor: string='green', playerShadowColor: string, enemyColor:string = 'red', enemyShadowColor: string, scale: number = 1) {
         this.x = x;
         this.y = y;
         this.xInitial = this.x;
@@ -69,7 +72,6 @@ export class Player {
         this.h = h * scale;
         this.distance = 0;
         this.scale = scale;
-        this.playerWalkSound = playerWalkSound;
         this.playerColor = playerColor;
         this.enemyColor = enemyColor;
         this.playerShadowColor = playerShadowColor;
@@ -191,11 +193,6 @@ export class Player {
 
     isPathAlreadyPresentOnPlayerPath(path: Path): boolean {
         console.log("pathPresent(): ", this.playerPath,'path ', path);
-        // The some() method of Array instances tests whether at least one element
-        // in the array passes the test implemented by the provided function.
-        // It returns true if, in the array, it finds an element for which the 
-        // provided function returns true; otherwise it returns false. It doesn't modify the array.
-        // return this.playerPath.some(p => p.x === path.x && p.y === path.y);
         
         for (let i=0; i<this.playerPath.length; i++){
             if (path.x == this.playerPath[i].x && path.y == this.playerPath[i].y)
@@ -203,16 +200,6 @@ export class Player {
         }
         return false;
     }
-
-    // removePathFromArray(path: Path) {
-    //     console.log('removePathArray() before : path.x and y playerPath ',path.x,' ',path.y, this.playerPath)
-    //     for (let i=0; i<this.playerPath.length; i++) {
-    //         if(this.playerPath[i].x !== this.xInitial && this.playerPath[i].y !== this.yInitial){
-    //             this.playerPath.splice(i, 1);
-    //         }
-    //     }
-    //     console.log('removePathArray() out : path.x and y playerPath ',path.x,' ',path.y, this.playerPath)
-    // }
 
     removePathFromArray(paths: Path[]) {
         console.log('removePathArray() before : playerPath', this.playerPath);
@@ -235,8 +222,8 @@ export class Player {
 
         this.isPlayerAnimating = true;
 
-        console.log('audio duration ',this.playerWalkSound.duration)
-        this.playerWalkSound.play();
+        console.log('audio duration ', playerWalkSound.duration)
+        playerWalkSound.play();
         // await new Promise(resolve => {
         //     this.playerWalkSound.onended = resolve; // Resolve the Promise when audio playback ends
         // });
