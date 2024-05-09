@@ -91,8 +91,8 @@ medium.addEventListener('click', () => {
         config.wallLineWidth = 2;
     } else {
         // for tablet, laptop and desktop
-        config.numberOfRows = 26;
-        config.numberOfColumns = 26;
+        config.numberOfRows = 30;
+        config.numberOfColumns = 30;
         config.wallLineWidth = 4;
     }
 
@@ -115,14 +115,14 @@ hard.addEventListener('click', () => {
     canvas.style.display = 'block';
 
     if (config.mobile) {
-        config.numberOfRows = 40;
+        config.numberOfRows = 35;
         config.numberOfColumns = 40;
-        config.wallLineWidth = 1;
+        config.wallLineWidth = 2;
     } else {
         // for tablet, laptop and desktop
-        config.numberOfRows = 40;
-        config.numberOfColumns = 40;
-        config.wallLineWidth = 1;
+        config.numberOfRows = 50;
+        config.numberOfColumns = 50;
+        config.wallLineWidth = 2;
     }
 
     createNewGame();

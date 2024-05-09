@@ -313,11 +313,11 @@ export class Player {
     drawPlayer(x: number, y: number) {
         let radius;
         if (this.w == this.h) {
-            radius = (this.h/2) - this.maze.wallLineWidth * 2;
+            radius = (this.h/2) - this.maze.wallLineWidth ;
         } else if (this.w < this.h) {
-            radius = this.w/2 - this.maze.wallLineWidth * 2;
+            radius = this.w/2 - this.maze.wallLineWidth ;
         } else {
-            radius = this.h/2 - this.maze.wallLineWidth * 2;
+            radius = this.h/2 - this.maze.wallLineWidth ;
         }
 
         // this.ctx.save()
@@ -357,11 +357,11 @@ export class Player {
         
         let radius;
         if (this.w == this.h) {
-            radius = (this.h/2) - this.maze.wallLineWidth * 2;
+            radius = (this.h/2) - this.maze.wallLineWidth;
         } else if (this.w < this.h) {
-            radius = this.w/2 - this.maze.wallLineWidth * 2;
+            radius = this.w/2 - this.maze.wallLineWidth;
         } else {
-            radius = this.h/2 - this.maze.wallLineWidth * 2;
+            radius = this.h/2 - this.maze.wallLineWidth;
         }
 
         // Draw a green circle representing the playe
