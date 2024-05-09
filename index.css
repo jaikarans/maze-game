@@ -13,6 +13,78 @@ body {
 
 }
 
+#logo {
+    rotate: -45deg;
+    scale: 0.5;
+}
+
+#mainMenu {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: #2D5A0E;
+}
+
+#menuList {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    flex-grow: 2;
+    gap:16px;
+}
+
+button {
+
+    width: 80%;
+    font-family: "Oswald", sans-serif;
+    /* padding: 10px; */
+    font-size: 16px;
+    /* margin-top:auto; */
+    /* padding: 12px 0px; */
+    border:1px solid black;
+    border-radius:8px;
+    box-shadow: 5px 7px 0px 2px #3B0E5A;
+    font-weight: bold;
+    text-shadow: 2px 3px #451069;
+    
+    font-size:x-large;
+    color:rgb(255, 255, 255);
+    background-color:#4B9618;
+
+}
+
+/* Media query for tablets, desktops, and laptops */
+@media only screen and (min-width: 768px) {
+    button {
+        width: 400px;
+        padding: 15px;
+        /* font-size: 20px; */
+
+    }
+
+    #menuList {
+        /* flex-grow: 1; */
+        gap: 24px;
+    }
+
+    #logo {
+        scale: 0.5;
+    }
+}
+
+
+button:hover {
+    background-color:#5da02f;
+    scale: 1.04;
+
+}
+
+button:
+
+
 canvas{
     /* background-color: rgb(181, 178, 255); */
     /* background-color: white; */

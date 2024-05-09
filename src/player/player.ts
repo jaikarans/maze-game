@@ -3,6 +3,7 @@ import { cellHasTwoPaths, cellIsDeadend } from "../maze/cellQuery";
 import { Maze } from "../maze/maze";
 import { renderMazePath } from "../maze/mazeBoundaryRender";
 import { reduceAlpha } from "../maze/reduceAlpha";
+import { Firework } from "./firework";
 
 export class Path {
     x: number
@@ -55,6 +56,7 @@ export class Player {
     isPlayerMovingBackward: boolean = false;
 
     isGameEnded: boolean = false;
+    fireworks: Firework[] = [];
 
 
     constructor(x: number, y: number, w: number, h: number, maze: Maze, ctx: CanvasRenderingContext2D, playerWalkSound: HTMLAudioElement, playerColor: string='green', playerShadowColor: string, enemyColor:string = 'red', enemyShadowColor: string, scale: number = 1) {
@@ -297,6 +299,11 @@ export class Player {
             console.log('game end please refrese the game');
             this.isGameEnded = true;
             this.isPlayerAnimating = false;
+            // const firework = new Firework((this.x + 0.5) * this.w, (this.y + 0.5) * this.h);
+            // this.fireworks.push(firework)
+            // this.fireworks.forEach(firework => {
+            //     firework.draw(this.ctx);
+            // })
             return;
 
         }
@@ -317,15 +324,21 @@ export class Player {
     }
 
     drawPlayer(x: number, y: number) {
-        const playerSize = this.w; // Adjust the player size as needed
-        const halfPlayerSize = playerSize / 2;
+        let radius;
+        if (this.w == this.h) {
+            radius = (this.h/2) - this.maze.wallLineWidth * 2;
+        } else if (this.w < this.h) {
+            radius = this.w/2 - this.maze.wallLineWidth * 2;
+        } else {
+            radius = this.h/2 - this.maze.wallLineWidth * 2;
+        }
 
         // this.ctx.save()
         // this.ctx.fillStyle = rg;
         this.ctx.save();
         let rg = this.ctx.createRadialGradient(
             (x) * this.w + this.w/3, (y) * this.h + this.w/3, 0,  // Inner circle position and radius
-            (x + 0.5) * this.w, (y + 0.5) * this.h, halfPlayerSize - this.maze.wallLineWidth // Outer circle position and radius
+            (x + 0.5) * this.w, (y + 0.5) * this.h, radius // Outer circle position and radius
         );
         rg.addColorStop(0, this.playerColor);
         rg.addColorStop (1, this.playerShadowColor)
@@ -339,7 +352,7 @@ export class Player {
         // Draw a green circle representing the player
         this.ctx.beginPath();
         // this.ctx.fillStyle = 'blue'
-        this.ctx.arc((x + 0.5) * this.w, (y + 0.5) * this.h, halfPlayerSize - this.maze.wallLineWidth, 0, Math.PI * 2);
+        this.ctx.arc((x + 0.5) * this.w, (y + 0.5) * this.h, radius, 0, Math.PI * 2);
         this.ctx.fill();
         this.ctx.closePath();
         // this.ctx.restore();
@@ -354,14 +367,21 @@ export class Player {
     }
 
     drawEnemy() {
-        const playerSize = this.w; // Adjust the player size as needed
-        const halfPlayerSize = playerSize / 2;
+        
+        let radius;
+        if (this.w == this.h) {
+            radius = (this.h/2) - this.maze.wallLineWidth * 2;
+        } else if (this.w < this.h) {
+            radius = this.w/2 - this.maze.wallLineWidth * 2;
+        } else {
+            radius = this.h/2 - this.maze.wallLineWidth * 2;
+        }
 
         // Draw a green circle representing the playe
         this.ctx.save();
         let rg = this.ctx.createRadialGradient(
             (this.xEnemy) * this.w + this.w/3, (this.yEnemy) * this.h + this.w/3, 0,  // Inner circle position and radius
-            (this.xEnemy + 0.5) * this.w, (this.yEnemy + 0.5) * this.h, halfPlayerSize - this.maze.wallLineWidth // Outer circle position and radius
+            (this.xEnemy + 0.5) * this.w, (this.yEnemy + 0.5) * this.h, radius // Outer circle position and radius
         );
         rg.addColorStop(0, this.enemyColor);
         rg.addColorStop (1, this.enemyShadowColor)
@@ -374,7 +394,7 @@ export class Player {
 
         this.ctx.beginPath();
         // this.ctx.fillStyle = this.enemyColor;
-        this.ctx.arc((this.xEnemy + 0.5) * this.w, (this.yEnemy + 0.5) * this.h, halfPlayerSize - this.maze.wallLineWidth, 0, Math.PI * 2);
+        this.ctx.arc((this.xEnemy + 0.5) * this.w, (this.yEnemy + 0.5) * this.h, radius, 0, Math.PI * 2);
         // this.ctx.arc(((this.xEnemy + 0.5) * this.w)/1.5, ((this.yEnemy + 0.5) * this.h)/1.5, (halfPlayerSize - this.maze.wallLineWidth)/4, 0, Math.PI * 2);
         this.ctx.fill();
         this.ctx.closePath();

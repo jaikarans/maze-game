@@ -37,8 +37,8 @@ const config = {
         use: [stylesHandler, "css-loader"],
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-        type: "asset",
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
       },
       {
         test: /\.(wav|mp3)$/,

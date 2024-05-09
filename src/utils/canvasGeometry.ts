@@ -6,12 +6,13 @@ export const assignCanvasWidthHight = (canvas: HTMLCanvasElement) => {
     console.log('innerWidth ', window.innerWidth)
     if (window.innerWidth < 768) {
         // for mobiles and tablets
-        canvas.width = Math.floor((viewportWidth));
-        canvas.height = Math.floor(viewportWidth + (25*viewportWidth/100))
+        canvas.width = viewportWidth;
+        canvas.height = viewportWidth;
+        // canvas.height = Math.floor(viewportWidth + (25 * viewportWidth/100))
     } else if (window.innerWidth > 768) {
         // for laptop and pc
-        canvas.width = Math.round((90 * viewportHeight) / 100);
-        canvas.height = Math.round((90 * viewportHeight) / 100);
+        canvas.width = Math.round((95 * viewportHeight) / 100);
+        canvas.height = Math.round((95 * viewportHeight) / 100);
         console.log('innerWidth ', window.innerWidth)
     }
 

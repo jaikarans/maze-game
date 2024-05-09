@@ -9,7 +9,11 @@ import { renderMazePath } from './maze/mazeBoundaryRender';
 import { reduceAlpha } from './maze/reduceAlpha';
 import { highlightVisitedCells } from './maze/cellRender';
 import '../assets/playerWalkSoundDum60.wav'
+import { showMainMenu } from './pages/mainMenu';
 
+
+
+showMainMenu();
 
 const canvas = document?.getElementById('canvas') as HTMLCanvasElement;
 
@@ -21,22 +25,43 @@ const ctx = canvas?.getContext('2d') as CanvasRenderingContext2D;
 const body = document.getElementsByTagName('body')[0];
 
 
-let backgroundColor = '#b7b7b7';
-body.style.backgroundColor = '#cccccc'
+// let backgroundColor = '#b7b7b7';
+// body.style.backgroundColor = '#cccccc'
+
+// // let backgroundColor = '#267247'; // background color is #40BF77
+// let wallColor = '#141414'; // dark Grey color theory
+// // let wallColor = '#8cd8ad'; 
+// let objectShadow = '#515151';
+
+// let playerRecentPathHighlightColor = '#7f7fff'
+// let playerColor = '#0000FF'; // player color #E54624 complementry of background color
+// let playerShadowColor = '#00007f';
+// let enemyColor = '#990000'; // triadic color of background color #8D41BF
+// let enemyShadowColor = '#4c0000';
+
+
+// let wallShadowColor = '#A0153E';
+
+let backgroundColor = '#4B9618';
+body.style.backgroundColor = '#2D5A0E'
 
 // let backgroundColor = '#267247'; // background color is #40BF77
-let wallColor = '#141414'; // dark Grey color theory
+let wallColor = '#ffffff'; // dark Grey color theory
 // let wallColor = '#8cd8ad'; 
-let objectShadow = '#515151';
+let objectShadow = '#2d5a0e';
 
-let playerRecentPathHighlightColor = '#7f7fff'
-let playerColor = '#0000FF'; // player color #E54624 complementry of background color
-let playerShadowColor = '#00007f';
-let enemyColor = '#990000'; // triadic color of background color #8D41BF
-let enemyShadowColor = '#4c0000';
+let playerRecentPathHighlightColor = '#915db5'
+let playerColor = '#631896'; // player color #E54624 complementry of background color
+let playerShadowColor = '#451378';
+let enemyColor = '#ff0000'; // triadic color of background color #8D41BF
+let enemyShadowColor = '#cc0000';
 
 
 let wallShadowColor = '#A0153E';
+
+// **************************************
+
+// *****************************************
 let playerWalkSound = new Audio('../assets/playerWalkSoundDum60.wav');
 // try {
 // 	playerWalkSound.play();
@@ -45,9 +70,9 @@ let playerWalkSound = new Audio('../assets/playerWalkSoundDum60.wav');
 // 	console.log('audio not played ', e)
 // }
 
-let numberOfRows = 14;
-let numberOfColumns = 18;
-let wallLineWidth = 1;
+let numberOfRows = 10;
+let numberOfColumns = 10;
+let wallLineWidth = 5;
 let maze = new Maze(ctx, numberOfRows, numberOfColumns, wallColor, wallShadowColor, backgroundColor, objectShadow, playerColor, playerRecentPathHighlightColor, wallLineWidth);
 renderMazePath(maze);
 

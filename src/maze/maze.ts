@@ -59,7 +59,6 @@ export class Maze {
         this.ctx.save();
         this.ctx.beginPath();
         this.ctx.strokeStyle = this.wallColor;
-        this.ctx.lineCap = 'round'
         this.ctx.lineWidth = this.wallLineWidth; 
         this.ctx.strokeRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
         this.ctx.stroke();

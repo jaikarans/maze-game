@@ -8,14 +8,14 @@ export const drawCellBoundary = (cell: Cell, maze: Maze, ctx: CanvasRenderingCon
     let h = maze.hCell;
     let w = maze.wCell;
     ctx.strokeStyle = maze.wallColor;
-    // ctx.lineCap = 'round'
+    ctx.lineCap = 'round'
     ctx.lineWidth = maze.wallLineWidth;
 
     // also redering visited cell shadow 
     maze.ctx.save();
     maze.ctx.fillStyle = maze.playerRecentPathHighlightColor;
     maze.ctx.globalAlpha = cell.alpha
-    cell.alpha = cell.alpha;
+    // cell.alpha = cell.alpha;
     maze.ctx.fillRect(cell.x * maze.wCell, cell.y * maze.hCell, maze.wCell , maze.hCell);
     maze.ctx.restore();
 
