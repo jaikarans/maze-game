@@ -156,7 +156,7 @@ function handleGesture(event: any) {
     const deltaX = touchendX - touchstartX;
     const deltaY = touchendY - touchstartY;
     // You can adjust the threshold values as per your requirement
-    if (Math.abs(deltaX) > 30) {
+    if (Math.abs(deltaX) > 50) {
         // Horizontal swipe
         if (deltaX > 0) {
             // Swiped right
