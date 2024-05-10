@@ -28,11 +28,11 @@ export const assignCanvasWidthHight = (canvas: HTMLCanvasElement) => {
 
         } else {
             if (viewportWidth < viewportHeight) {
-                canvas.width = viewportWidth;
-                canvas.height = viewportWidth;
+                canvas.width = 90*(viewportWidth)/100;
+                canvas.height = 90*( viewportWidth)/100;
             } else {
-                canvas.width = viewportHeight
-                canvas.height = viewportHeight
+                canvas.width =  90*(viewportHeight)/100;
+                canvas.height = 90*(viewportHeight)/100;
             }
 
         }

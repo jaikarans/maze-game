@@ -286,13 +286,18 @@ export class Player {
             console.log('game end please refrese the game');
             this.isGameEnded = true;
             this.isPlayerAnimating = false;
+            let gameEndMenu = document.getElementById('gameEndOverlay');
+            if (gameEndMenu) {
+
+                gameEndMenu.style.display = 'flex';
+            }
             // const firework = new Firework((this.x + 0.5) * this.w, (this.y + 0.5) * this.h);
             // this.fireworks.push(firework)
             // this.fireworks.forEach(firework => {
-            //     firework.draw(this.ctx);
-            // })
-            return;
-
+                //     firework.draw(this.ctx);
+                // })
+                return;
+                
         }
 
         // this.playerWalkSound.pause();

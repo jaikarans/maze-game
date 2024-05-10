@@ -10,7 +10,25 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body id="body">
-    <canvas class="" id="canvas"></canvas>
+    <div id="game">
+        <div id="gameMenu">
+            <div id="timer">00:00:00</div>
+            <!-- <div id="pause">Pause</div> -->
+            <!-- <img id="pauseButton" src="./assets/pauseIcon50.png"></div> -->
+        </div>
+        <canvas class="" id="canvas"></canvas>
+    </div>
+    <div id="gameEndOverlay">
+        <!-- <div id="menuOverlayContent"> -->
+            <div id="scoreBar">
+                <div id="time">00:00:00</div>
+            </div>
+            <div id="overlayMenu">
+                <button class="overlayButton" id="newGameButton">New Game</button>
+                <button class="overlayButton" id="mainMenuOverlay">Main Menu</button>
+            </div>
+        <!-- </div> -->
+    </div>
 </body>
 </html>
     

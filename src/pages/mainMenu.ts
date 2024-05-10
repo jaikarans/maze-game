@@ -36,7 +36,13 @@ setting.innerText = 'Setting'
 score.innerText = 'Score'
 
 export const showMainMenu = () => {
-    document.getElementsByTagName('canvas')[0].style.display = 'none';
+    let gameDiv = document.getElementById('game');
+    if (gameDiv){
+        console.log('gameDiv is set to none')
+        gameDiv.style.display = 'none';
+
+    }
+    
     mainMenu.style.display = 'block';
 
 }
@@ -53,7 +59,11 @@ easy.addEventListener('click', () => {
         easy.classList.remove("clicked");
     }, 100);
     
-    canvas.style.display = 'block';
+    let gameDiv = document.getElementById('game');
+    if (gameDiv){
+        gameDiv.style.display = 'block';
+
+    }
 
     if (config.mobile) {
         config.numberOfRows = 14;
@@ -83,7 +93,11 @@ medium.addEventListener('click', () => {
         easy.classList.remove("clicked");
     }, 100);
     
-    canvas.style.display = 'block';
+    let gameDiv = document.getElementById('game');
+    if (gameDiv){
+        gameDiv.style.display = 'block';
+
+    }
 
     if (config.mobile) {
         config.numberOfRows = 20;
@@ -112,7 +126,11 @@ hard.addEventListener('click', () => {
         easy.classList.remove("clicked");
     }, 100);
     
-    canvas.style.display = 'block';
+    let gameDiv = document.getElementById('game');
+    if (gameDiv){
+        gameDiv.style.display = 'block';
+
+    }
 
     if (config.mobile) {
         config.numberOfRows = 35;
@@ -120,9 +138,9 @@ hard.addEventListener('click', () => {
         config.wallLineWidth = 2;
     } else {
         // for tablet, laptop and desktop
-        config.numberOfRows = 50;
-        config.numberOfColumns = 50;
-        config.wallLineWidth = 2;
+        config.numberOfRows = 60;
+        config.numberOfColumns = 60;
+        config.wallLineWidth = 1;
     }
 
     createNewGame();

@@ -6,11 +6,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow:hidden;
+    /* overflow:hidden; */
     display:flex;
     flex-direction: column;
     background-color: #3d3d3d;
 
+}
+
+#game {
+    color:#FEFFFE;
 }
 
 #logo {
@@ -37,12 +41,12 @@ body {
 }
 
 button {
-
+    
     width: 80%;
     font-family: "Poetsen One", sans-serif;
     font-style: normal;
     font-weight: 400;
-
+    
     /* padding: 5px; */
     font-size: 16px;
     /* margin-top:auto; */
@@ -56,13 +60,13 @@ button {
     font-size:x-large;
     color:#FEFFFE;
     background-color:#4B9618;
-
+    
 }
 
 button:hover {
     background-color:#5da02f;
     scale: 1.04;
-
+    
 }
 
 button.clicked {
@@ -76,14 +80,14 @@ button.clicked {
         width: 400px;
         padding: 15px;
         /* font-size: 20px; */
-
+        
     }
-
+    
     #menuList {
         /* flex-grow: 1; */
         gap: 24px;
     }
-
+    
     #logo {
         scale: 0.5;
     }
@@ -99,8 +103,85 @@ canvas{
     height: 1200; */
     /* width: 500px;
     height: 500px; */
-
+    
     /* width: 500;
     height: 500; */
     
+}
+
+
+#timer {
+    /* text-align: end; 
+    padding-top: 12px;   
+    font-size: 24px; */
+}
+#pauseButton {
+    background:#2D5A0E;
+
+}
+
+#gameMenu {
+    font-family: "Poetsen One", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    /* font-weight: bolder; */
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    padding: 10px;
+    font-weight: bolder;
+}
+
+/* #gameEndOverlay {
+    align-items: center;
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    z-index: 1;
+    background-color: red;
+    gap: 14px;
+
+} */
+
+#gameEndOverlay {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0,0,0,0);
+    padding: 20px;
+    z-index: 1;
+    align-items: center;
+    
+
+}
+#overlayMenu {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    flex-direction: column;
+    gap:14px;
+}
+
+.overlayButton {
+    width:100%;
+    
+
+}
+
+#scoreBar {
+    padding: 14px;
+    color:#FEFFFE;
+    font-family: "Poetsen One", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: larger;
 }
