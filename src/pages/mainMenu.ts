@@ -1,6 +1,9 @@
 import { config, game } from '..';
 import mazeMainLogo from '../../assets/mazeMainLogo.png'
 import { createNewGame } from '../utils/newGame';
+import { startCounter, resetTimerText } from '../utils/timer'
+import { disableTouchSwipe, enableTouchSwipe } from '../mobileTouch/mobileTouchHandler'
+import { disableKeybordControl, enableKeybordControl } from '../keybordAction/keybordHandler'
 
 const canvas = document.getElementsByTagName('canvas')[0];
 
@@ -42,8 +45,16 @@ export const showMainMenu = () => {
         gameDiv.style.display = 'none';
 
     }
+
+    // disabling the touch swipe
+    disableTouchSwipe();
+    // disable keyboard keys for controlling game
+    disableKeybordControl();
     
     mainMenu.style.display = 'block';
+
+
+
 
 }
 
@@ -77,6 +88,13 @@ easy.addEventListener('click', () => {
     }
 
     createNewGame();
+    resetTimerText();
+    startCounter();
+
+    // enable touch swipe
+    enableTouchSwipe();
+    // enbale keyboard keys for controlling game
+    enableKeybordControl();
 
 
 })
@@ -111,6 +129,13 @@ medium.addEventListener('click', () => {
     }
 
     createNewGame();
+    resetTimerText();
+    startCounter();
+
+    // enable touch swipe
+    enableTouchSwipe();
+    // enbale keyboard keys for controlling game
+    enableKeybordControl();
 
 })
 
@@ -144,6 +169,13 @@ hard.addEventListener('click', () => {
     }
 
     createNewGame();
+    resetTimerText();
+    startCounter();
+
+    // enable touch swipe
+    enableTouchSwipe();
+    // enbale keyboard keys for controlling game
+    enableKeybordControl();
 
 })
 
@@ -153,6 +185,11 @@ setting.addEventListener('click', () => {
     setTimeout(function() {
         setting.classList.remove("clicked");
     }, 100);
+
+    // enable touch swipe
+    enableTouchSwipe();
+    // enbale keyboard keys for controlling game
+    enableKeybordControl();
 })
 
 score.addEventListener('click', () => {
@@ -161,5 +198,10 @@ score.addEventListener('click', () => {
     setTimeout(function() {
         score.classList.remove("clicked");
     }, 100);
+
+    // enable touch swipe
+    enableTouchSwipe();
+    // enbale keyboard keys for controlling game
+    enableKeybordControl();
 
 })

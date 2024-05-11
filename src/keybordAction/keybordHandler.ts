@@ -1,7 +1,6 @@
 import { ctx, game, players } from "..";
 import { goBottom, goLeft, goRight, goTop } from "../player/playerControlls";
 
-document.onkeydown = checkKey;
 
 function checkKey(e: any) {
 
@@ -61,4 +60,13 @@ function checkKey(e: any) {
 		}
 		
 	}
+}
+
+export const enableKeybordControl = () => {
+	document.onkeydown = checkKey;
+}
+
+export const disableKeybordControl = () => {
+	document.onkeydown = null;
+
 }

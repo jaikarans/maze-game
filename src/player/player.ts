@@ -4,6 +4,9 @@ import { Maze } from "../maze/maze";
 import { renderMazePath } from "../maze/mazeBoundaryRender";
 import { reduceAlpha } from "../maze/reduceAlpha";
 import { Firework } from "./firework";
+import { stopCounter, resetTimerText } from '../utils/timer'
+import { disableTouchSwipe } from '../mobileTouch/mobileTouchHandler'
+import { disableKeybordControl } from '../keybordAction/keybordHandler'
 
 
 let playerWalkSound = new Audio('../assets/playerWalkSoundDum60.wav');
@@ -291,12 +294,22 @@ export class Player {
 
                 gameEndMenu.style.display = 'flex';
             }
-            // const firework = new Firework((this.x + 0.5) * this.w, (this.y + 0.5) * this.h);
-            // this.fireworks.push(firework)
-            // this.fireworks.forEach(firework => {
-                //     firework.draw(this.ctx);
-                // })
-                return;
+
+            let score = document.getElementById('time');
+            let timer = document.getElementById('timer');
+            if (score) {
+                if (timer) {
+                    score.innerText = timer.innerText;
+                    stopCounter()
+                }
+            }
+
+            // disabling the touch swipe
+            disableTouchSwipe();
+            // disable keyboard keys for controlling game
+            disableKeybordControl();
+            
+            return;
                 
         }
 

@@ -7,23 +7,26 @@ let touchstartY = 0;
 let touchendX = 0;
 let touchendY = 0;
 
-document.addEventListener('touchstart', function(event) {
-    touchstartX = event.changedTouches[0].screenX;
+const getTouchCordinatesOnTouchstart = (event: TouchEvent) => {
+	touchstartX = event.changedTouches[0].screenX;
     touchstartY = event.changedTouches[0].screenY;
-}, false);
 
-document.addEventListener('touchend', function(event) {
-    touchendX = event.changedTouches[0].screenX;
+};
+
+const getTouchCordinatesOnTouchend = (event: TouchEvent) => {
+	touchendX = event.changedTouches[0].screenX;
     touchendY = event.changedTouches[0].screenY;
     handleGesture(event);
-}, false);
+
+};
+
 
 function handleGesture(event: any) {
-    const deltaX = touchendX - touchstartX;
+	const deltaX = touchendX - touchstartX;
     const deltaY = touchendY - touchstartY;
     // You can adjust the threshold values as per your requirement
     if (Math.abs(deltaX) > 50) {
-        // Horizontal swipe
+		// Horizontal swipe
         if (deltaX > 0) {
             // Swiped right
 			event.preventDefault();
@@ -35,28 +38,28 @@ function handleGesture(event: any) {
 				console.log('can not go right')
 			}
         } else {
-            // Swiped left
+			// Swiped left
 			event.preventDefault();
 			if (!players.player.isPlayerAnimating) {
 				console.log('Swiped left');
 				goLeft(players.player, game.maze, ctx);
 				players.player.animatePlayer();
-
+				
 			} else {
 				console.log('can not go left')
 			}
         }
-    } else if (Math.abs(deltaY) > 30) {
-        // Vertical swipe
+    } else if (Math.abs(deltaY) > 50) {
+		// Vertical swipe
         if (deltaY > 0) {
-            // Swiped down
+			// Swiped down
 			event.preventDefault();
             console.log('Swiped down');
             // Prevent default behavior of scrolling down
 			if (!players.player.isPlayerAnimating) {
 				goBottom(players.player, game.maze, ctx);
 				players.player.animatePlayer();
-
+				
 			} else {
 				console.log('can not go swiped down')
 			}
@@ -67,7 +70,7 @@ function handleGesture(event: any) {
 				console.log('Swiped up');
 				goTop(players.player, game.maze, ctx);
 				players.player.animatePlayer();
-
+				
 			} else {
 				console.log('can not go up')
 			}
@@ -75,7 +78,24 @@ function handleGesture(event: any) {
     }
 }
 
+
 // Disable browser's down swipe reloading
 document.addEventListener('touchmove', function(event) {
-    event.preventDefault();
+	event.preventDefault();
 }, { passive: false });
+
+
+// Enable touch swipe
+export const enableTouchSwipe = () => {
+	document.addEventListener('touchstart', getTouchCordinatesOnTouchstart, false);
+	
+	document.addEventListener('touchend', getTouchCordinatesOnTouchend, false);
+
+}
+
+export const disableTouchSwipe = () => {
+	document.removeEventListener('touchstart', getTouchCordinatesOnTouchstart, false);
+	
+	document.removeEventListener('touchend', getTouchCordinatesOnTouchend, false);
+
+}

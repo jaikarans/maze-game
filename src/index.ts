@@ -2,6 +2,7 @@ import '../index.css'
 import './pages/gameEnd'
 import './mobileTouch/mobileTouchHandler'
 import './keybordAction/keybordHandler'
+import './utils/timer'
 import { Maze } from './maze/maze';
 import { Player } from './player/player';
 import { goBottom, goLeft, goRight, goTop } from './player/playerControlls';

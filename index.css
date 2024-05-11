@@ -133,19 +133,6 @@ canvas{
     font-weight: bolder;
 }
 
-/* #gameEndOverlay {
-    align-items: center;
-    text-align: center;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 100%;
-    z-index: 1;
-    background-color: red;
-    gap: 14px;
-
-} */
-
 #gameEndOverlay {
     display: none;
     flex-direction: column;
@@ -184,4 +171,8 @@ canvas{
     font-style: normal;
     font-weight: 400;
     font-size: larger;
+    /* text-shadow: 2px 2px 14px #000000; */
+    text-shadow:  2px 3px black,
+    0 0 1em black,
+    0 0 0.2em black;
 }
