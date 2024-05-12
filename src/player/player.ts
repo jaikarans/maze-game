@@ -97,41 +97,6 @@ export class Player {
 
     }
 
-    renderPath(maze: Maze, ctx: CanvasRenderingContext2D) {
-
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        renderMazePath(maze);
-
-        console.log('renderPath() : playerPath.length ', this.playerPath.length, this.playerPath);
-
-        let cells: Cell[][] = maze.cells;
-
-        ctx.save();
-        ctx.strokeStyle = this.playerColor;
-        ctx.beginPath();
-        ctx.lineWidth = 3;
-        this.playerPath.forEach(path => {
-            // let cx = this.w * path.x + this.w/2;
-            // let cy = this.h * path.y + this.h/2;
-
-            let cx = (path.x + 0.5) * maze.wCell; // Adjust for cell center and scale
-            let cy = (path.y + 0.5) * maze.hCell;
-
-            // ctx.globalAlpha = cells[path.x][path.y].alpha
-
-            console.log(this.x, this.y);
-            // ctx.arc(cx, cy, this.w/3, 0, 2 * Math.PI, false);
-            ctx.lineTo(cx, cy);
-            // ctx.fillRect(cx, cy, maze.wCell, maze.hCell)
-
-        })
-        ctx.stroke();
-        ctx.closePath();
-        ctx.restore();
-
-
-    }
-
     findPath(cell: Cell, sideCell: Cell) {
         
         if (!cell) {
