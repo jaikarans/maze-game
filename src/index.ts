@@ -14,7 +14,6 @@ import { reduceAlpha } from './maze/reduceAlpha';
 import '../assets/playerWalkSoundDum60.wav'
 import { showMainMenu } from './pages/mainMenu';
 
-import logo from '../assets/pauseIcon50.png';
 
 export const config = {
 	mobile: true,

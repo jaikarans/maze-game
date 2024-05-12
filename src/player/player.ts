@@ -83,8 +83,8 @@ export class Player {
         this.maze = maze;
         this.ctx = ctx;
 
-        this.xEnemy = Math.floor(Math.random() * maze.rows);
-        this.yEnemy = Math.floor(Math.random() * maze.columns);
+        this.xEnemy = Math.floor(Math.random() * (maze.rows - (maze.rows - 5)) + (maze.rows - 5));
+        this.yEnemy = Math.floor(Math.random() * (maze.columns - (maze.columns - 5)) + (maze.columns - 5));
         
 
         console.log('Enemy coordinate ', this.xEnemy,' ', this.yEnemy);

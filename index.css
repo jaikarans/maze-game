@@ -6,7 +6,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* overflow:hidden; */
+    overflow:hidden;
     display:flex;
     flex-direction: column;
     background-color: #3d3d3d;
