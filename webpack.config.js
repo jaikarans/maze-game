@@ -2,6 +2,7 @@
 
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV == "production";
@@ -21,6 +22,12 @@ const config = {
     new HtmlWebpackPlugin({
       template: "index.html",
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: path.resolve(__dirname, 'assets/favicon.ico'), to: 'favicon.ico' }
+
+      ]
+  }),
 
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
@@ -37,7 +44,7 @@ const config = {
         use: [stylesHandler, "css-loader"],
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
         type: 'asset/resource',
       },
       {
