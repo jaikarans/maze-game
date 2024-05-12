@@ -35,4 +35,4 @@ mainMenuButton?.addEventListener('click', () => {
 });
 
 
-console.log('hi gameEnd.ts')
+// console.log('hi gameEnd.ts')

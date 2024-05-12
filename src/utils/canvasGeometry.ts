@@ -5,7 +5,7 @@ export const assignCanvasWidthHight = (canvas: HTMLCanvasElement) => {
     let viewportWidth = window.innerWidth;
 
     
-    console.log('innerW ', window.innerWidth)
+    // console.log('innerW ', window.innerWidth)
     if (window.innerWidth < 768) {
         // for mobiles and tablets
         canvas.width = viewportWidth;
@@ -38,7 +38,7 @@ export const assignCanvasWidthHight = (canvas: HTMLCanvasElement) => {
         }
         
         config.mobile = false;
-        console.log('innerWidth ', window.innerWidth)
+        // console.log('innerWidth ', window.innerWidth)
     }
 
 

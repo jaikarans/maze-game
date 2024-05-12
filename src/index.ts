@@ -70,4 +70,4 @@ setInterval(() => {
 
 }, 200)
 
-console.log("viportWidth: ", window.innerWidth, " viewportHeight: ", window.innerHeight)
+// console.log("viportWidth: ", window.innerWidth, " viewportHeight: ", window.innerHeight)

@@ -5,7 +5,7 @@ let pausedTime = 0; // Variable to store the time when paused
 
 function updateTimer() {
 
-    console.log('timer');
+    // console.log('timer');
     // Get the current time
     var now = new Date().getTime();
     

@@ -9,7 +9,7 @@ export const goTop = (player: Player, maze: Maze, ctx: CanvasRenderingContext2D)
 
     // check if cell allow us to go in that direction otherwise return
     if (!currentCell.isTopOpen) {
-        console.log('cannot go top: ', player.x, ' ', player.y);
+        // console.log('cannot go top: ', player.x, ' ', player.y);
         return
     }
 
@@ -18,7 +18,7 @@ export const goTop = (player: Player, maze: Maze, ctx: CanvasRenderingContext2D)
     // or reached the destination
     player.findPath(currentCell, currentCell.topNeighbour as Cell);
     // player.renderPath(maze, ctx);
-    console.log('goTop()')
+    // console.log('goTop()')
 
 }
 
@@ -27,13 +27,13 @@ export const goRight = (player: Player, maze: Maze, ctx: CanvasRenderingContext2
     let currentCell = maze.cells[player.x][player.y];
 
     if (!currentCell.isRightOpen) {
-        console.log('cannot go right: ', player.x, player.y);
+        // console.log('cannot go right: ', player.x, player.y);
         return
     }
 
     player.findPath(currentCell, currentCell.rightNeighbour as Cell);
     // player.renderPath(maze, ctx);
-    console.log('goRight()')
+    // console.log('goRight()')
 
 }
 
@@ -42,13 +42,13 @@ export const goBottom =(player: Player, maze: Maze, ctx: CanvasRenderingContext2
     let currentCell = maze.cells[player.x][player.y];
 
     if (!currentCell.isBottomOpen) {
-        console.log('cannot go bottom: ', player.x, player.y);
+        // console.log('cannot go bottom: ', player.x, player.y);
         return
     }
 
     player.findPath(currentCell, currentCell.bottomNeighbour as Cell);
     // player.renderPath(maze, ctx);
-    console.log('goBottom()')
+    // console.log('goBottom()')
 
 }
 
@@ -57,12 +57,12 @@ export const goLeft = (player: Player, maze: Maze, ctx: CanvasRenderingContext2D
     let currentCell = maze.cells[player.x][player.y];
 
     if (!currentCell.isLeftOpen) {
-        console.log('cannot go left: ', player.x, player.y);
+        // console.log('cannot go left: ', player.x, player.y);
         return
     }
 
     player.findPath(currentCell, currentCell.leftNeighbour as Cell);
     // player.renderPath(maze, ctx);
-    console.log('goLeft()');
+    // console.log('goLeft()');
     
 }

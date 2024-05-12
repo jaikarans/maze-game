@@ -6,12 +6,12 @@ export const CellsWithoutAnyOpenSide = (cellArray: Cell[][]) : Cell[] => {
     cellArray.forEach(cells => {
         cells.forEach(cell => {
             if (isClosedCell(cell)){
-                console.log('cell is closed: ', cell.x, ', ', cell.y);
+                // console.log('cell is closed: ', cell.x, ', ', cell.y);
                 closeCells.push(cell);
             }
         })
     })
-    console.log('CellsWithoutAnyOpenSide, ', closeCells.length);
+    // console.log('CellsWithoutAnyOpenSide, ', closeCells.length);
     return closeCells;
 }
 

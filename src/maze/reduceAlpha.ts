@@ -4,7 +4,7 @@ import { Cell } from "./cell";
 export const reduceAlpha = (cells: Cell[][], player: Player, reduceBy: number, reduceTill: number = 0) => {
     cells.forEach(cellArray => {
         cellArray.forEach(cell => {
-            // console.log('cell.alpha before ', cell.alpha)
+            // // console.log('cell.alpha before ', cell.alpha)
             if (cell.alpha !== 0){
 
                 cell.alpha = parseFloat((cell.alpha - reduceBy).toFixed(2));
@@ -13,7 +13,7 @@ export const reduceAlpha = (cells: Cell[][], player: Player, reduceBy: number, r
             if (cell.alpha < 0) {
                 cell.alpha = 0;
             }
-            // console.log('cell.alpha after ', cell.alpha)
+            // // console.log('cell.alpha after ', cell.alpha)
 
         })
     });

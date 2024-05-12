@@ -13,24 +13,24 @@ function checkKey(e: any) {
 	if (e.keyCode == '38' || e.keyCode == 87) {
 		// up arrow or w
 		if (!players.player.isPlayerAnimating){
-			console.log('up arrow');
+			// console.log('up arrow');
 			goTop(players.player, game.maze, ctx);
 			players.player.animatePlayer();
 		} else {
 
-			console.log('up arrow No');
+			// console.log('up arrow No');
 		}
 
 	}
 	else if (e.keyCode == '40' || e.keyCode == 83) {
 		// down arrow or s
 		if (!players.player.isPlayerAnimating) {
-			console.log('down swap');
+			// console.log('down swap');
 			// erasePlayerAndPath (player, maze,ctx);
         	goBottom(players.player, game.maze, ctx);
 			players.player.animatePlayer();
 		} else {
-			console.log('down arrow No')
+			// console.log('down arrow No')
 		}
 		
 
@@ -39,12 +39,12 @@ function checkKey(e: any) {
 	else if (e.keyCode == '37' || e.keyCode == 65) {
 		// left arrow or a
 		if (!players.player.isPlayerAnimating) {
-			console.log('left swap');
+			// console.log('left swap');
 			goLeft(players.player, game.maze, ctx);
 			players.player.animatePlayer();
 			
 		} else {
-			console.log('left arrow No');
+			// console.log('left arrow No');
 		}
 		
 	}
@@ -52,11 +52,11 @@ function checkKey(e: any) {
 		// right arrow or d
 		if (!players.player.isPlayerAnimating) {
 			
-			console.log('right swap');
+			// console.log('right swap');
 			goRight(players.player, game.maze, ctx);
 			players.player.animatePlayer();
 		} else {
-			console.log('righ arrow No');
+			// console.log('righ arrow No');
 		}
 		
 	}

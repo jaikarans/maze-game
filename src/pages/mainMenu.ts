@@ -42,7 +42,7 @@ setting.innerText = 'Setting'
 export const showMainMenu = () => {
     let gameDiv = document.getElementById('game');
     if (gameDiv){
-        console.log('gameDiv is set to none')
+        // console.log('gameDiv is set to none')
         gameDiv.style.display = 'none';
 
     }
@@ -61,7 +61,7 @@ export const showMainMenu = () => {
 }
 
 easy.addEventListener('click', () => {
-    console.log('easy clicked.. ');
+    // console.log('easy clicked.. ');
 
     // to add button click effect
     easy.classList.toggle("clicked");

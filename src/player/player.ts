@@ -84,7 +84,7 @@ export class Player {
         this.yEnemy = Math.floor(Math.random() * (maze.columns - (maze.columns - 5)) + (maze.columns - 5));
         
 
-        console.log('Enemy coordinate ', this.xEnemy,' ', this.yEnemy);
+        // console.log('Enemy coordinate ', this.xEnemy,' ', this.yEnemy);
         this.drawPlayer(this.x, this.y);
         this.drawEnemy();
 
@@ -97,24 +97,24 @@ export class Player {
     findPath(cell: Cell, sideCell: Cell) {
         
         if (!cell) {
-            console.log('Player.findPath() : cell you paased is null or undefined')
+            // console.log('Player.findPath() : cell you paased is null or undefined')
             return null;
         }
         if (!sideCell) {
-            console.log('Player.findPath(cell, side) : side value can be top, right, bottom, left only');
+            // console.log('Player.findPath(cell, side) : side value can be top, right, bottom, left only');
             return null;
         }
 
         let tmpCell: Cell;
 
-        // console.log('before added to paths x,y ', this.x,' ',this.y);
+        // // console.log('before added to paths x,y ', this.x,' ',this.y);
 
         while (!cellHasTwoPaths(sideCell) && !cellIsDeadend(sideCell) && !this.cellIsEnemy(sideCell)) {
 
-            // console.log('while Loop')
+            // // console.log('while Loop')
 
             // paths.push(new Path(sideCell.x, sideCell.y));
-            // console.log('findPath(): sideCell.x and y ', sideCell.x,' ', sideCell.y)
+            // // console.log('findPath(): sideCell.x and y ', sideCell.x,' ', sideCell.y)
             this.playerPath.push(new Path(sideCell.x, sideCell.y));
 
             if (sideCell.topNeighbour && sideCell.topNeighbour !== cell) {
@@ -143,14 +143,14 @@ export class Player {
 
         this.numberOfPaths = this.playerPath.length;
         this.playerPath.reverse();
-        console.log("findPath() playerPath lenght", this.playerPath.length)
+        // console.log("findPath() playerPath lenght", this.playerPath.length)
 
 
     }
 
     cellIsEnemy(cell: Cell) {
         if (cell.x == this.xEnemy && cell.y == this.yEnemy){
-            console.log('enemy cell ',cell.x,' ',cell.y,' xEnemy ', this.xEnemy,' ', this.yEnemy, '###############################################################')
+            // console.log('enemy cell ',cell.x,' ',cell.y,' xEnemy ', this.xEnemy,' ', this.yEnemy, '###############################################################')
             return true;
         }
 
@@ -158,7 +158,7 @@ export class Player {
     }
 
     isPathAlreadyPresentOnPlayerPath(path: Path): boolean {
-        console.log("pathPresent(): ", this.playerPath,'path ', path);
+        // console.log("pathPresent(): ", this.playerPath,'path ', path);
         
         for (let i=0; i<this.playerPath.length; i++){
             if (path.x == this.playerPath[i].x && path.y == this.playerPath[i].y)
@@ -168,7 +168,7 @@ export class Player {
     }
 
     removePathFromArray(paths: Path[]) {
-        console.log('removePathArray() before : playerPath', this.playerPath);
+        // console.log('removePathArray() before : playerPath', this.playerPath);
         this.playerPath = this.playerPath.filter(path => {
             if (path.x === this.xInitial && path.y === this.yInitial) {
                 return true; // Keep the initial position
@@ -179,7 +179,7 @@ export class Player {
                 return !isPathInPaths;
             }
         });
-        console.log('removePathArray() out : playerPath', this.playerPath);
+        // console.log('removePathArray() out : playerPath', this.playerPath);
     }
     
 
@@ -188,7 +188,7 @@ export class Player {
 
         this.isPlayerAnimating = true;
 
-        console.log('audio duration ', playerWalkSound.duration)
+        // console.log('audio duration ', playerWalkSound.duration)
         if (config.soundEnabled) {
             playerWalkSound.play();
 
@@ -204,14 +204,14 @@ export class Player {
         await new Promise(resolve => setTimeout(resolve, 50));
 
         // i++;
-        // console.log('currentPointIndex: ', currentPointIndex)
-        console.log('animate else Length of playerPath ', this.playerPath.length);
+        // // console.log('currentPointIndex: ', currentPointIndex)
+        // console.log('animate else Length of playerPath ', this.playerPath.length);
 
 
-        console.log('else !nextPoint: ', !nextPoint, nextPoint)
+        // console.log('else !nextPoint: ', !nextPoint, nextPoint)
         if (!nextPoint) {
             this.isPlayerAnimating = false;
-            console.log('else animation return:')
+            // console.log('else animation return:')
             return; // Animation complete
         }
 
@@ -236,7 +236,7 @@ export class Player {
         this.drawEnemy();
 
         // Draw player at new position
-        console.log('else drawing x y ', this.x, ' ', this.y, ' playerPath ', this.playerPath)
+        // console.log('else drawing x y ', this.x, ' ', this.y, ' playerPath ', this.playerPath)
         // this.drawPlayer((this.x + 0.5) * this.w, (this.y + 0.5) * this.h);
         this.drawPlayer(this.x, this.y);
         // this.playerWalkSound.pause();
@@ -252,7 +252,7 @@ export class Player {
 
         if (this.x == this.xEnemy && this.y == this.yEnemy) {
             // alert('game end please refrese the game');
-            console.log('game end please refrese the game');
+            // console.log('game end please refrese the game');
             this.isGameEnded = true;
             this.isPlayerAnimating = false;
             let gameEndMenu = document.getElementById('gameEndOverlay');
@@ -334,7 +334,7 @@ export class Player {
         // this.ctx.arc(((x) * this.w) + (this.w/3), ((y) * this.h) + (this.h/3), (halfPlayerSize - this.maze.wallLineWidth)/4, 0, Math.PI * 2);
         // this.ctx.fill();
         this.ctx.restore()
-        console.log('drawPlayer x,y ',x, ' ', y)
+        // console.log('drawPlayer x,y ',x, ' ', y)
     }
 
     drawEnemy() {
@@ -370,7 +370,7 @@ export class Player {
         this.ctx.fill();
         this.ctx.closePath();
         this.ctx.restore()
-        console.log('drawEnemy x, y ',this.xEnemy, ' ', this.yEnemy);
+        // console.log('drawEnemy x, y ',this.xEnemy, ' ', this.yEnemy);
     }
 
 
