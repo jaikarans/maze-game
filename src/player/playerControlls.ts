@@ -1,6 +1,6 @@
 import { Cell } from "../maze/cell";
 import { Maze } from "../maze/maze";
-import { Path, Player } from "./player";
+import { Player } from "./player";
 
 export const goTop = (player: Player, maze: Maze, ctx: CanvasRenderingContext2D) => {
 

@@ -18,11 +18,4 @@ export const reduceAlpha = (cells: Cell[][], player: Player, reduceBy: number, r
         })
     });
 
-    // print cell alpha value after updatation
-    // cells.forEach(cellArray => {
-    //     cellArray.forEach(cell => {
-            
-    //         console.log(cell,cell.alpha);
-    //     })
-    // })
 }

@@ -1,7 +1,5 @@
 import {Cell} from './cell'
-import { getAnyUnvisitedNeighbourOf, removeWallBetween } from './cellOperations';
 import { generateMazePaths } from './mazeGeneration';
-import { drawCellBoundary } from './cellRender';
 import { renderMazePath } from './mazeBoundaryRender';
 
 export class Maze {

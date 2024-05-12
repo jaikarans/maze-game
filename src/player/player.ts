@@ -2,8 +2,6 @@ import { Cell } from "../maze/cell";
 import { cellHasTwoPaths, cellIsDeadend } from "../maze/cellQuery";
 import { Maze } from "../maze/maze";
 import { renderMazePath } from "../maze/mazeBoundaryRender";
-import { reduceAlpha } from "../maze/reduceAlpha";
-import { Firework } from "./firework";
 import { stopTimer } from '../utils/timer'
 import { disableTouchSwipe } from '../mobileTouch/mobileTouchHandler'
 import { disableKeybordControl } from '../keybordAction/keybordHandler'
@@ -63,7 +61,6 @@ export class Player {
     isPlayerMovingBackward: boolean = false;
 
     isGameEnded: boolean = false;
-    fireworks: Firework[] = [];
 
 
     constructor(x: number, y: number, w: number, h: number, maze: Maze, ctx: CanvasRenderingContext2D, playerColor: string='green', playerShadowColor: string, enemyColor:string = 'red', enemyShadowColor: string, scale: number = 1) {

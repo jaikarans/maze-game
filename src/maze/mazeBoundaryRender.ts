@@ -1,4 +1,3 @@
-import { printCellPath } from "../tests/cell";
 import { drawCellBoundary } from "./cellRender";
 import { Maze } from "./maze";
 

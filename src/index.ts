@@ -67,7 +67,6 @@ export const players = {
 // reducing color transparacy of player's recent highlighted path
 setInterval(() => {
 	reduceAlpha(game.maze.cells, players.player, 0.01, 0);
-	// highlightVisitedCells(maze, player);
 
 }, 200)
 
