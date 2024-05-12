@@ -1,5 +1,7 @@
 import '../index.css'
 import './pages/gameEnd'
+import './pages/setting'
+import './pages/pauseGame'
 import './mobileTouch/mobileTouchHandler'
 import './keybordAction/keybordHandler'
 import './utils/timer'
@@ -14,18 +16,12 @@ import { showMainMenu } from './pages/mainMenu';
 
 import logo from '../assets/pauseIcon50.png';
 
-// Use the imported image as needed in your code
-// const img = new Image();
-// img.src = logo;
-// document.getElementById('gameMenu')?.appendChild(img);
-
-
 export const config = {
 	mobile: true,
 	numberOfRows: 14,
 	numberOfColumns: 14,
 	wallLineWidth: 1,
-	
+	soundEnabled: true,
 
 }
 

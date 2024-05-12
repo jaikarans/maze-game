@@ -4,9 +4,10 @@ import { Maze } from "../maze/maze";
 import { renderMazePath } from "../maze/mazeBoundaryRender";
 import { reduceAlpha } from "../maze/reduceAlpha";
 import { Firework } from "./firework";
-import { stopCounter, resetTimerText } from '../utils/timer'
+import { stopTimer } from '../utils/timer'
 import { disableTouchSwipe } from '../mobileTouch/mobileTouchHandler'
 import { disableKeybordControl } from '../keybordAction/keybordHandler'
+import { config } from '../index'
 
 
 let playerWalkSound = new Audio('../assets/playerWalkSoundDum60.wav');
@@ -226,7 +227,10 @@ export class Player {
         this.isPlayerAnimating = true;
 
         console.log('audio duration ', playerWalkSound.duration)
-        playerWalkSound.play();
+        if (config.soundEnabled) {
+            playerWalkSound.play();
+
+        }
         // await new Promise(resolve => {
         //     this.playerWalkSound.onended = resolve; // Resolve the Promise when audio playback ends
         // });
@@ -300,7 +304,7 @@ export class Player {
             if (score) {
                 if (timer) {
                     score.innerText = timer.innerText;
-                    stopCounter()
+                    stopTimer();
                 }
             }
 

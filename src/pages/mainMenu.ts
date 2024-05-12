@@ -1,9 +1,10 @@
 import { config, game } from '..';
 import mazeMainLogo from '../../assets/mazeMainLogo.png'
 import { createNewGame } from '../utils/newGame';
-import { startCounter, resetTimerText } from '../utils/timer'
+import { startTimer } from '../utils/timer'
 import { disableTouchSwipe, enableTouchSwipe } from '../mobileTouch/mobileTouchHandler'
 import { disableKeybordControl, enableKeybordControl } from '../keybordAction/keybordHandler'
+import { pauseGameOverlay } from './pauseGame';
 
 const canvas = document.getElementsByTagName('canvas')[0];
 
@@ -17,7 +18,7 @@ const easy = document.createElement('button');
 const medium = document.createElement('button');
 const hard = document.createElement('button');
 const setting = document.createElement('button');
-const score = document.createElement('button');
+// const score = document.createElement('button');
 
 mainMenu.id = 'mainMenu'
 logo.id = 'logo'
@@ -27,7 +28,7 @@ menuList.id = 'menuList'
 document.getElementsByTagName('body')[0].appendChild(mainMenu);
 mainMenu.appendChild(logo);
 mainMenu.appendChild(menuList);
-menuList.append(easy, medium, hard, setting, score);
+menuList.append(easy, medium, hard, setting);
 
 // logo properties
 logo.src = mazeMainLogo
@@ -36,7 +37,7 @@ easy.innerText = 'Easy';
 medium.innerText = 'Medium';
 hard.innerText = 'Hard';
 setting.innerText = 'Setting'
-score.innerText = 'Score'
+// score.innerText = 'Score'
 
 export const showMainMenu = () => {
     let gameDiv = document.getElementById('game');
@@ -46,15 +47,16 @@ export const showMainMenu = () => {
 
     }
 
+    if (pauseGameOverlay) {
+        pauseGameOverlay.style.display = 'none';
+    }
+
     // disabling the touch swipe
     disableTouchSwipe();
     // disable keyboard keys for controlling game
     disableKeybordControl();
     
     mainMenu.style.display = 'block';
-
-
-
 
 }
 
@@ -88,8 +90,8 @@ easy.addEventListener('click', () => {
     }
 
     createNewGame();
-    resetTimerText();
-    startCounter();
+    startTimer();
+    // startCounter();
 
     // enable touch swipe
     enableTouchSwipe();
@@ -129,8 +131,7 @@ medium.addEventListener('click', () => {
     }
 
     createNewGame();
-    resetTimerText();
-    startCounter();
+    startTimer();
 
     // enable touch swipe
     enableTouchSwipe();
@@ -169,8 +170,7 @@ hard.addEventListener('click', () => {
     }
 
     createNewGame();
-    resetTimerText();
-    startCounter();
+    startTimer();
 
     // enable touch swipe
     enableTouchSwipe();
@@ -182,26 +182,42 @@ hard.addEventListener('click', () => {
 setting.addEventListener('click', () => {
     setting.classList.toggle("clicked");
 
-    setTimeout(function() {
+    // setTimeout(function() {
+    // }, 100);
+    new Promise((resolve) => {
+        setTimeout(resolve, 100)
+    }).then(() => {
         setting.classList.remove("clicked");
-    }, 100);
+
+    })
 
     // enable touch swipe
-    enableTouchSwipe();
+    disableTouchSwipe();
     // enbale keyboard keys for controlling game
-    enableKeybordControl();
+    disableKeybordControl();
+
+    let settingOverlay = document.getElementById('setting');
+    if (settingOverlay) {
+        if (config.mobile) {
+            settingOverlay.style.width = '50%';
+        } else {
+            settingOverlay.style.width = '30%';
+        }
+
+        settingOverlay.style.display = 'flex';
+    }
 })
 
-score.addEventListener('click', () => {
-    score.classList.toggle("clicked");
+// score.addEventListener('click', () => {
+//     score.classList.toggle("clicked");
 
-    setTimeout(function() {
-        score.classList.remove("clicked");
-    }, 100);
+//     setTimeout(function() {
+//         score.classList.remove("clicked");
+//     }, 100);
 
-    // enable touch swipe
-    enableTouchSwipe();
-    // enbale keyboard keys for controlling game
-    enableKeybordControl();
+//     // enable touch swipe
+//     enableTouchSwipe();
+//     // enbale keyboard keys for controlling game
+//     enableKeybordControl();
 
-})
+// })

@@ -66,12 +66,13 @@ button {
 button:hover {
     background-color:#5da02f;
     scale: 1.04;
+    cursor: pointer;
     
 }
 
 button.clicked {
     background-color:#5da02f;
-    scale: 1.04;
+    /* scale: 1; */
 }
 
 /* Media query for tablets, desktops, and laptops */
@@ -115,10 +116,7 @@ canvas{
     padding-top: 12px;   
     font-size: 24px; */
 }
-#pauseButton {
-    background:#2D5A0E;
 
-}
 
 #gameMenu {
     font-family: "Poetsen One", sans-serif;
@@ -128,6 +126,7 @@ canvas{
     /* font-weight: bolder; */
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     gap: 16px;
     padding: 10px;
     font-weight: bolder;
@@ -161,7 +160,6 @@ canvas{
 .overlayButton {
     width:100%;
     
-
 }
 
 #scoreBar {
@@ -175,4 +173,83 @@ canvas{
     text-shadow:  2px 3px black,
     0 0 1em black,
     0 0 0.2em black;
+}
+
+
+#setting {
+    display: none;
+    /* flex-direction: row; */
+    position: absolute;
+    width: 50%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #2D5A0E;
+    padding: 20px;
+    z-index: 2;
+    /* align-items: center; */
+    justify-content: center;
+    padding: 32px;
+    border:1px solid black;
+    border-radius:8px;
+    box-shadow: 2px 3px 2px #363535;
+    
+}
+
+#soundIcon {
+    padding: 12px 12px;
+    border:1px solid black;
+    border-radius:8px;
+    box-shadow: 2px 3px 2px #363535;    
+    background-color:#4B9618;
+
+}
+
+#crossIcon {
+    position:absolute;
+    padding: 12px 12px;
+    top: 0;
+    right: 0;
+    /* border:1px solid black;
+    border-radius:8px;
+    box-shadow: 2px 3px 2px #363535;     */
+    background-color: rgba(0,0,0,0);
+}
+
+#soundIcon:hover {
+    background-color:#5da02f;
+    scale: 1.04;
+    cursor: pointer;
+    
+}
+#crossIcon:hover {
+    scale: 1.2;
+    cursor: pointer;
+}
+#pauseButton:hover {
+    scale: 1.2;
+    cursor: pointer;
+}
+
+#pauseGameOverlay {
+    display: none;
+    flex-direction: column;
+    gap: 24px;
+    position: absolute;
+    width: 50%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #2D5A0E;
+    padding: 20px;
+    z-index: 2;
+    /* align-items: center; */
+    justify-content: center;
+    padding: 32px;
+    border:1px solid black;
+    border-radius:8px;
+    box-shadow: 2px 3px 2px #363535;
+    
 }

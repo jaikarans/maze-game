@@ -1,5 +1,8 @@
 const timer = document.getElementById('timer');
 
+let paused = false; // Variable to track if the timer is paused
+let pausedTime = 0; // Variable to store the time when paused
+
 function updateTimer() {
 
     console.log('timer');
@@ -32,20 +35,37 @@ var startTime = new Date().getTime();
 
 let startCounterId: NodeJS.Timeout;
 
-export const resetTimerText = () => {
+export const startTimer = () => {
     startTime = new Date().getTime();
     if (timer) {
         timer.innerText = '00:00:00';
     }
-}
-
-// Update the timer every second
-export const startCounter = () => {
     startCounterId = setInterval(updateTimer, 1000)
 }
 
-
-
-export const stopCounter = () => {
-    clearInterval(startCounterId);
+export const stopTimer = () => {
+    clearInterval(startCounterId)
+    
 }
+
+export const pauseTimer = () => {
+    clearInterval(startCounterId);
+    paused = true;
+    pausedTime = new Date().getTime(); // Store the current time when paused
+
+}
+
+// Update the timer every second
+export const resumeTimer = () => {
+    // startTime = new Date().getTime();
+    // startCounterId = setInterval(updateTimer, 1000)
+    if (paused) {
+        startTime += new Date().getTime() - pausedTime; // Adjust startTime to account for paused time
+        startCounterId = setInterval(updateTimer, 1000);
+        paused = false;
+    }
+
+}
+
+
+

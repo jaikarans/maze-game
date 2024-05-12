@@ -3,7 +3,7 @@ import { Maze } from "../maze/maze";
 import { Player } from "../player/player";
 import { createNewGame } from "../utils/newGame";
 import { showMainMenu } from '../pages/mainMenu'
-import { resetTimerText, startCounter } from '../utils/timer'
+import { startTimer } from '../utils/timer'
 import { enableTouchSwipe } from '../mobileTouch/mobileTouchHandler'
 import { enableKeybordControl } from "../keybordAction/keybordHandler";
 
@@ -16,8 +16,7 @@ newGameButton?.addEventListener('click', () => {
         gameEndOverlay.style.display = 'none';
     }
     createNewGame();
-    resetTimerText();
-    startCounter();
+    startTimer();
 
     // enable touch swipe
     enableTouchSwipe();
